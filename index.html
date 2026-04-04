@@ -126,6 +126,26 @@
       width: 100%;
     }
 
+    .hero-split {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      margin-bottom: 0;
+    }
+
+    .hero-left {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+
+    .hero-right {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
     .hero-tag {
       display: inline-block;
       font-size: 0.72rem;
@@ -146,7 +166,7 @@
       line-height: 1.1;
       letter-spacing: -0.03em;
       color: var(--white);
-      margin-bottom: 28px;
+      margin-bottom: 0;
       max-width: 780px;
     }
 
@@ -790,6 +810,12 @@
 
     /* ─── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 640px) {
+      .hero-split {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 32px;
+      }
+
       .problem-grid {
         grid-template-columns: 1fr;
       }
@@ -869,16 +895,17 @@
   <!-- ─── 1. HERO ─────────────────────────────────────────── -->
   <section id="hero">
     <div class="hero-inner">
-      <div class="hero-tag">Automatización para agencias inmobiliarias · España</div>
-      <h1 class="hero-title">
-        Tu agencia está perdiendo comisiones cada vez que tardas <em>más de 5 minutos</em> en responder un lead
-      </h1>
-      <p class="hero-subtitle">
-        El 78% de los compradores elige al primero que responde.
-        <strong>Tu sistema responde en menos de 2 minutos,</strong>
-        cualifica y agenda — mientras tú estás en una visita.
-      </p>
-      <a href="#demo" class="btn-primary">Solicita una demo gratuita de 20 minutos</a>
+      <div class="hero-split">
+        <div class="hero-left">
+          <div class="hero-tag">Automatización para agencias inmobiliarias · España</div>
+          <h1 class="hero-title">
+            Tu agencia está perdiendo comisiones cada vez que tardas <em>más de 5 minutos</em> en responder un lead
+          </h1>
+        </div>
+        <div class="hero-right">
+          <a href="#demo" class="btn-primary">Solicita una demo gratuita de 20 minutos</a>
+        </div>
+      </div>
 
       <div class="hero-proof">
         <div class="proof-item">
