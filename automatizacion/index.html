@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nodo Grau — Automatización para negocios</title>
+  <meta name="description" content="Identificamos qué procesos te roban tiempo y los automatizamos. Con IA o sin ella, lo que mejor funcione para tu negocio." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray-100: #f5f5f5;
+      --gray-200: #e8e8e8;
+      --gray-400: #9a9a9a;
+      --gray-600: #5a5a5a;
+      --gray-800: #2a2a2a;
+      --accent: #1a3a5c;
+      --accent-light: #2255a4;
+      --accent-glow: rgba(34, 85, 164, 0.12);
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--black);
+      color: var(--white);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo img {
+      height: 26px;
+      width: auto;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ─── LAYOUT ──────────────────────────────────────── */
+    section {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 100px;
+      text-align: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      border: 1px solid rgba(34, 85, 164, 0.35);
+      background: var(--accent-glow);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--accent-light);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--gray-400);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .hero-cta:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .hero-cta svg {
+      transition: transform 0.2s;
+    }
+
+    .hero-cta:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* ─── DIVIDER ─────────────────────────────────────── */
+    .divider {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ─── PROBLEMA ────────────────────────────────────── */
+    .problema {
+      padding-top: 88px;
+      padding-bottom: 88px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      margin-bottom: 20px;
+    }
+
+    .problema h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 28px;
+    }
+
+    .problema p {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      line-height: 1.75;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+
+    .pain-list {
+      list-style: none;
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    .pain-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gray-600);
+      margin-top: 7px;
+    }
+
+    /* ─── SOLUCION ────────────────────────────────────── */
+    .solucion {
+      padding-top: 88px;
+      padding-bottom: 88px;
+      background: linear-gradient(180deg, transparent 0%, rgba(34,85,164,0.04) 50%, transparent 100%);
+    }
+
+    .solucion h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+
+    .solucion > .lead {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 48px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(34,85,164,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    /* ─── COMO FUNCIONA ───────────────────────────────── */
+    .como {
+      padding-top: 88px;
+      padding-bottom: 88px;
+    }
+
+    .como h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+
+    .como > p {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      line-height: 1.75;
+      max-width: 540px;
+      margin-bottom: 52px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      bottom: -24px;
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .step + .step {
+      padding-top: 32px;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--gray-400);
+      flex-shrink: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .step-content {
+      padding-top: 12px;
+    }
+
+    .step-content h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .step-content p {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      line-height: 1.65;
+    }
+
+    /* ─── REVIEWS ─────────────────────────────────────── */
+    .reviews {
+      padding-top: 88px;
+      padding-bottom: 88px;
+    }
+
+    .reviews h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 48px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+
+    .review-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+      color: #f59e0b;
+      font-size: 0.85rem;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      line-height: 1.65;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .review-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(34,85,164,0.25);
+      border: 1px solid rgba(34,85,164,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      flex-shrink: 0;
+    }
+
+    .review-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .review-biz {
+      font-size: 0.78rem;
+      color: var(--gray-600);
+    }
+
+    /* ─── CTA FINAL ───────────────────────────────────── */
+    .cta-final {
+      padding-top: 80px;
+      padding-bottom: 100px;
+      text-align: center;
+    }
+
+    .cta-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 56px 40px;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      font-size: 1rem;
+      color: var(--gray-400);
+      max-width: 420px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gray-400);
+      letter-spacing: 0.02em;
+    }
+
+    .form-field input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 0.95rem;
+      font-family: var(--font);
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-field input::placeholder {
+      color: var(--gray-600);
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: rgba(34,85,164,0.6);
+    }
+
+    .form-field textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 0.95rem;
+      font-family: var(--font);
+      color: var(--white);
+      outline: none;
+      resize: vertical;
+      min-height: 100px;
+      transition: border-color 0.2s;
+    }
+
+    .form-field textarea::placeholder {
+      color: var(--gray-600);
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--white);
+      color: var(--black);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+      font-family: var(--font);
+      transition: opacity 0.2s, transform 0.2s;
+      margin-top: 4px;
+    }
+
+    .form-submit:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .consultoria-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .consultoria-check:hover {
+      border-color: rgba(34,85,164,0.4);
+      background: rgba(34,85,164,0.05);
+    }
+
+    .consultoria-check input[type="checkbox"] {
+      display: none;
+    }
+
+    .check-box {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      background: transparent;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .consultoria-check input:checked ~ .check-box {
+      background: var(--accent-light);
+      border-color: var(--accent-light);
+    }
+
+    .consultoria-check input:checked ~ .check-box::after {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 9px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translateY(-1px);
+    }
+
+    .check-label {
+      font-size: 0.88rem;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 24px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray-600);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="../logo.svg" alt="Nodo Grau" />
+      Nodo Grau
+    </a>
+    <a href="mailto:hola@nodograu.com" class="nav-cta">
+      Hablemos
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Agencia de automatización</div>
+    <h1>Los procesos manuales<br/>te cuestan <span>más de lo que crees</span></h1>
+    <p>Analizamos tu negocio, identificamos dónde se pierde tiempo y lo automatizamos. Con IA o sin ella — lo que mejor encaje.</p>
+    <a href="mailto:hola@nodograu.com" class="hero-cta">
+      Cuéntanos tu caso
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PROBLEMA -->
+  <section class="problema">
+    <p class="section-label">El problema</p>
+    <h2>Cuántas horas a la semana<br/>dedicas a tareas repetitivas?</h2>
+    <p>Responder los mismos mensajes, mover datos entre herramientas, actualizar hojas de cálculo, enviar recordatorios a mano... Cada hora que tú o tu equipo gastáis en eso es una hora que no estáis haciendo lo que realmente hace crecer el negocio.</p>
+    <p>El problema no es la falta de disciplina. Es que nadie os ha dicho qué se puede automatizar, ni cómo.</p>
+    <ul class="pain-list">
+      <li>Tareas que se repiten igual cada día o cada semana</li>
+      <li>Información que hay que copiar de un sitio a otro a mano</li>
+      <li>Seguimiento de clientes que depende de que alguien se acuerde</li>
+      <li>Respuestas tardías porque no hay un sistema detrás</li>
+      <li>Errores humanos en procesos que podrían ser automáticos</li>
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SOLUCION -->
+  <section class="solucion">
+    <p class="section-label">Lo que hacemos</p>
+    <h2>Automatización a medida,<br/>no soluciones genéricas</h2>
+    <p class="lead">No vendemos software. Construimos sistemas específicos para tu negocio: conectamos tus herramientas, eliminamos los pasos manuales y dejamos todo funcionando sin que tengas que tocarlo.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <h3>Automatización de procesos</h3>
+        <p>Flujos que mueven información, generan documentos, envían notificaciones y coordinan tu equipo sin intervención manual.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h3>Automatización con IA</h3>
+        <p>Cuando la tarea requiere leer, clasificar, redactar o tomar decisiones, integramos modelos de lenguaje que lo hacen solos.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <h3>Integración de herramientas</h3>
+        <p>CRM, correo, WhatsApp, hojas de cálculo, ERPs — los conectamos para que los datos fluyan solos entre sistemas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Sistemas de seguimiento</h3>
+        <p>Paneles y alertas automáticas para que siempre sepas el estado de tu operación sin tener que preguntar.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- COMO FUNCIONA -->
+  <section class="como">
+    <p class="section-label">Cómo funciona</p>
+    <h2>Simple. Sin complicaciones técnicas<br/>de tu parte.</h2>
+    <p>Te preguntas qué tienes que hacer tú para que esto funcione. La respuesta honesta: contarnos cómo trabajas.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Diagnóstico</h3>
+          <p>Nos cuentas cómo funciona tu negocio hoy — qué haces, con qué herramientas, dónde ves que se pierde tiempo. Nosotros identificamos qué se puede automatizar y cuánto impacto tendría.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Propuesta concreta</h3>
+          <p>Te explicamos exactamente qué vamos a construir, cómo va a funcionar y qué resultado puedes esperar. Sin tecnicismos, sin ambigüedades.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Implementación y entrega</h3>
+          <p>Construimos el sistema, lo probamos contigo y te lo entregamos funcionando. Seguimos disponibles si algo cambia o necesitas ajustes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <p class="section-label">Clientes</p>
+    <h2>Lo que dicen quienes<br/>ya trabajan con nosotros</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Llevábamos años haciendo lo mismo a mano. En dos semanas teníamos un sistema que lo hacía solo. El equipo no podía creerlo."</p>
+        <div class="review-author">
+          <div class="review-avatar">MR</div>
+          <div>
+            <div class="review-name">María R.</div>
+            <div class="review-biz">Clínica dental, Valencia</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"El seguimiento de presupuestos lo hacíamos a mano en Excel. Ahora es automático y nunca se nos escapa un cliente."</p>
+        <div class="review-author">
+          <div class="review-avatar">JM</div>
+          <div>
+            <div class="review-name">Jordi M.</div>
+            <div class="review-biz">Empresa de reformas, Barcelona</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Recibimos muchas consultas por WhatsApp e Instagram. Ahora hay un flujo que las gestiona, responde y las clasifica sin que nadie las mire."</p>
+        <div class="review-author">
+          <div class="review-avatar">CL</div>
+          <div>
+            <div class="review-name">Carmen L.</div>
+            <div class="review-biz">Tienda online, Madrid</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Lo que más me sorprendió fue lo rápido que entendieron cómo funciona mi negocio. No tuve que explicar nada técnico."</p>
+        <div class="review-author">
+          <div class="review-avatar">PG</div>
+          <div>
+            <div class="review-name">Pablo G.</div>
+            <div class="review-biz">Gestoría, Bilbao</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="cta-box">
+      <h2>¿Qué podrías dejar<br/>de hacer a mano?</h2>
+      <p>Cuéntanos cómo funciona tu negocio. Miramos juntos qué tiene sentido automatizar y te decimos qué se puede hacer.</p>
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="d39773a3-5cf7-4423-b427-43419ac4275a" />
+        <input type="hidden" name="subject" value="Nuevo contacto — Nodo Grau" />
+        <input type="checkbox" name="botcheck" style="display:none" />
+        <div class="form-row">
+          <div class="form-field">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-field">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" name="phone" placeholder="+34 600 000 000" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@empresa.com" required />
+        </div>
+        <div class="form-field">
+          <label for="problema">¿Qué quieres automatizar? <span style="color:var(--gray-600);font-weight:400">(opcional)</span></label>
+          <textarea id="problema" name="problema" placeholder="Describe brevemente el proceso o tarea que te gustaría dejar de hacer a mano..."></textarea>
+        </div>
+        <label class="consultoria-check">
+          <input type="checkbox" name="consultoria" value="Sí" />
+          <span class="check-box"></span>
+          <span class="check-label">No tengo claro qué automatizar — quiero una consultoría gratuita</span>
+        </label>
+        <button type="submit" class="form-submit">Quiero que me contactéis →</button>
+        <p class="form-note">Sin spam. Solo nos ponemos en contacto si tiene sentido para tu negocio.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Nodo Grau. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
