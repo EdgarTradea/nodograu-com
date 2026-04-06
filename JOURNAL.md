@@ -1,3 +1,17 @@
+## 2026-04-06 11:25 — Automatizacion page promoted to homepage, favicon fix, CTA anchor bug
+
+**Changes made:**
+- `automatizacion/index.html` — Added missing `id="cta-final"` to the CTA section; all CTAs were pointing to `#cta-final` but the section only had a class, not an id, so clicks did nothing.
+- `index.html` — Replaced old homepage with the automatizacion page content. Updated asset paths from `../logo.svg` to `logo.svg`. nodograu.com now shows the automatizacion page directly.
+- `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`, `site.webmanifest` — Added full favicon stack from favicon_io. Previously only an SVG favicon was used, which many platforms render poorly or ignore when generating link previews.
+- `index.html` + `automatizacion/index.html` — Added Open Graph meta tags (`og:image` pointing to the 512x512 PNG, `og:title`, `og:description`) so link previews on WhatsApp, iMessage, etc. look correct.
+
+**Decisions:**
+- Promote automatizacion page to root — the old homepage was redundant; the automatizacion page is the actual product offering.
+- No client dashboard / CRM built — discussed the idea but Edgar has no active clients yet. Decision: use Notion per-client when the first project arrives; revisit building something custom at 3-4 clients if Notion feels limited.
+
+---
+
 ## 2026-04-04 22:13 — Hero section layout redesign: CTA moved inline with headline
 
 **Changes made:**
