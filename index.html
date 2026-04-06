@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nodo Grau — Automatización para agencias inmobiliarias</title>
-  <meta name="description" content="Tu agencia está perdiendo comisiones cada vez que tardas más de 5 minutos en responder un lead. Sistema de respuesta automática para agencias inmobiliarias en España." />
+  <title>Nodo Grau — Automatización para negocios</title>
+  <meta name="description" content="Identificamos qué procesos te roban tiempo y los automatizamos. Con IA o sin ella, lo que mejor funcione para tu negocio." />
   <link rel="icon" type="image/svg+xml" href="logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,17 +26,11 @@
       --gray-800: #2a2a2a;
       --accent: #1a3a5c;
       --accent-light: #2255a4;
-      --accent-glow: rgba(34, 85, 164, 0.15);
-      --green: #0f7a3e;
-      --green-light: #d4f4e3;
-      --red-light: #fde8e8;
-      --red: #c0392b;
+      --accent-glow: rgba(34, 85, 164, 0.12);
       --font: 'Inter', system-ui, -apple-system, sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font);
@@ -50,9 +44,7 @@
     /* ─── NAV ─────────────────────────────────────────── */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 18px 24px;
       display: flex;
@@ -64,7 +56,7 @@
     }
 
     .nav-logo {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--white);
@@ -75,829 +67,591 @@
     }
 
     .nav-logo img {
-      height: 28px;
+      height: 26px;
       width: auto;
-      display: block;
-    }
-
-    .nav-logo span {
-      color: var(--accent-light);
     }
 
     .nav-cta {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--white);
-      background: var(--accent-light);
-      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.85rem;
+      font-weight: 700;
       padding: 9px 18px;
-      border-radius: 6px;
-      transition: background 0.2s;
-      white-space: nowrap;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s;
     }
 
-    .nav-cta:hover {
-      background: #1a44a0;
-    }
+    .nav-cta:hover { opacity: 0.85; }
 
-    /* ─── SECTION WRAPPER ─────────────────────────────── */
-    .section {
-      padding: 96px 24px;
-      max-width: 860px;
+    /* ─── LAYOUT ──────────────────────────────────────── */
+    section {
+      width: 100%;
+      max-width: 760px;
       margin: 0 auto;
-    }
-
-    .section-full {
-      padding: 96px 24px;
+      padding: 0 24px;
     }
 
     /* ─── HERO ────────────────────────────────────────── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: var(--black);
-      padding: 120px 24px 80px;
-    }
-
-    .hero-form-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-      margin-bottom: 10px;
-    }
-
-    .hero-form-desc {
-      font-size: 0.88rem;
-      color: var(--gray-400);
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    .hero-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .hero-split {
-      display: flex;
-      align-items: flex-start;
-      gap: 48px;
-      margin-bottom: 0;
-    }
-
-    .hero-left {
-      flex: 1 1 0;
-      min-width: 0;
-    }
-
-    .hero-right {
-      flex: 0 0 400px;
-      min-width: 0;
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 100px;
+      text-align: center;
     }
 
     .hero-tag {
       display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--accent-light);
-      border: 1px solid rgba(34, 85, 164, 0.4);
-      background: rgba(34, 85, 164, 0.08);
-      padding: 6px 14px;
-      border-radius: 4px;
-      margin-bottom: 32px;
+      border: 1px solid rgba(34, 85, 164, 0.35);
+      background: var(--accent-glow);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
     }
 
-    .hero-title {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
       font-weight: 900;
-      line-height: 1.15;
+      line-height: 1.1;
       letter-spacing: -0.03em;
-      color: var(--white);
-      margin-bottom: 0;
-      max-width: 780px;
+      margin-bottom: 20px;
     }
 
-    .hero-title em {
-      font-style: normal;
+    .hero h1 span {
       color: var(--accent-light);
     }
 
-    .hero-subtitle {
-      font-size: clamp(1rem, 2.2vw, 1.18rem);
+    .hero p {
+      font-size: 1.1rem;
       color: var(--gray-400);
-      max-width: 640px;
+      max-width: 520px;
+      margin: 0 auto 36px;
       line-height: 1.7;
-      margin-bottom: 44px;
     }
 
-    .hero-subtitle strong {
-      color: var(--white);
-      font-weight: 600;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      background: var(--accent-light);
-      color: var(--white);
-      text-decoration: none;
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--black);
       font-size: 1rem;
       font-weight: 700;
-      padding: 16px 32px;
-      border-radius: 8px;
-      transition: background 0.2s, transform 0.15s;
-      cursor: pointer;
-      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s, transform 0.2s;
     }
 
-    .btn-primary:hover {
-      background: #1a44a0;
+    .hero-cta:hover {
+      opacity: 0.9;
       transform: translateY(-1px);
     }
 
-    .hero-proof {
-      margin-top: 60px;
-      padding-top: 40px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
+    .hero-cta svg {
+      transition: transform 0.2s;
     }
 
-    .proof-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .proof-number {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      color: var(--white);
-    }
-
-    .proof-label {
-      font-size: 0.82rem;
-      color: var(--gray-400);
-      line-height: 1.4;
-      max-width: 160px;
+    .hero-cta:hover svg {
+      transform: translateX(3px);
     }
 
     /* ─── DIVIDER ─────────────────────────────────────── */
     .divider {
-      height: 1px;
-      background: rgba(255,255,255,0.07);
-      max-width: 860px;
+      width: 100%;
+      max-width: 760px;
       margin: 0 auto;
-    }
-
-    /* ─── SECTION LABEL ───────────────────────────────── */
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent-light);
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 800;
-      line-height: 1.2;
-      letter-spacing: -0.025em;
-      color: var(--white);
-      margin-bottom: 20px;
-    }
-
-    .section-lead {
-      font-size: 1.05rem;
-      color: var(--gray-400);
-      max-width: 600px;
-      line-height: 1.7;
-    }
-
-    .section-lead strong {
-      color: var(--white);
+      padding: 0 24px;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
     }
 
     /* ─── PROBLEMA ────────────────────────────────────── */
-    #problema {
-      background: #0e0e0e;
+    .problema {
+      padding-top: 88px;
+      padding-bottom: 88px;
     }
 
-    .problem-grid {
-      margin-top: 56px;
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      margin-bottom: 20px;
+    }
+
+    .problema h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 28px;
+    }
+
+    .problema p {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      line-height: 1.75;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+
+    .pain-list {
+      list-style: none;
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    .pain-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gray-600);
+      margin-top: 7px;
+    }
+
+    /* ─── SOLUCION ────────────────────────────────────── */
+    .solucion {
+      padding-top: 88px;
+      padding-bottom: 88px;
+      background: linear-gradient(180deg, transparent 0%, rgba(34,85,164,0.04) 50%, transparent 100%);
+    }
+
+    .solucion h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+
+    .solucion > .lead {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 48px;
+    }
+
+    .cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .problem-cell {
-      background: #111111;
-      padding: 32px 28px;
-    }
-
-    .problem-cell.full {
-      grid-column: 1 / -1;
-      background: #0f1922;
-      border-top: 2px solid var(--accent-light);
-    }
-
-    .problem-stat {
-      font-size: 3rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-
-    .problem-stat.red { color: #e05555; }
-    .problem-stat.amber { color: #e09c2a; }
-
-    .problem-desc {
-      font-size: 0.92rem;
-      color: var(--gray-400);
-      line-height: 1.6;
-    }
-
-    .problem-desc strong {
-      color: var(--white);
-    }
-
-    .problem-conclusion {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.6;
-    }
-
-    .problem-conclusion em {
-      font-style: normal;
-      color: #74aaee;
-    }
-
-    /* ─── SOLUCIONES FALLIDAS ─────────────────────────── */
-    #soluciones {
-      background: var(--black);
-    }
-
-    .fail-cards {
-      margin-top: 56px;
-      display: grid;
       gap: 16px;
     }
 
-    .fail-card {
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 28px 28px 28px 24px;
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 20px;
-      align-items: start;
-      background: #0d0d0d;
+    @media (max-width: 560px) {
+      .cards { grid-template-columns: 1fr; }
     }
 
-    .fail-icon {
-      width: 48px;
-      height: 48px;
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
-      background: rgba(192, 57, 43, 0.12);
+      background: var(--accent-glow);
+      border: 1px solid rgba(34,85,164,0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .fail-icon svg {
-      width: 22px;
-      height: 22px;
-      stroke: #e05555;
-    }
-
-    .fail-title {
+      margin-bottom: 16px;
       font-size: 1rem;
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
       font-weight: 700;
-      color: var(--white);
       margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      letter-spacing: -0.01em;
     }
 
-    .fail-badge {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #e05555;
-      background: rgba(224, 85, 85, 0.1);
-      border: 1px solid rgba(224, 85, 85, 0.2);
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-
-    .fail-text {
-      font-size: 0.9rem;
+    .card p {
+      font-size: 0.875rem;
       color: var(--gray-400);
-      line-height: 1.65;
+      line-height: 1.6;
     }
 
-    /* ─── MECANISMO ───────────────────────────────────── */
-    #mecanismo {
-      background: #0a0f14;
+    /* ─── COMO FUNCIONA ───────────────────────────────── */
+    .como {
+      padding-top: 88px;
+      padding-bottom: 88px;
+    }
+
+    .como h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+
+    .como > p {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      line-height: 1.75;
+      max-width: 540px;
+      margin-bottom: 52px;
     }
 
     .steps {
-      margin-top: 56px;
       display: flex;
       flex-direction: column;
       gap: 0;
-      position: relative;
-    }
-
-    .steps::before {
-      content: '';
-      position: absolute;
-      left: 23px;
-      top: 24px;
-      bottom: 24px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent-light), rgba(34, 85, 164, 0.1));
     }
 
     .step {
       display: grid;
       grid-template-columns: 48px 1fr;
-      gap: 24px;
-      padding: 0 0 44px 0;
+      gap: 20px;
       position: relative;
     }
 
-    .step:last-child {
-      padding-bottom: 0;
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      bottom: -24px;
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .step + .step {
+      padding-top: 32px;
     }
 
     .step-num {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--accent-light);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 800;
-      color: var(--white);
+      color: var(--gray-400);
       flex-shrink: 0;
-      position: relative;
-      z-index: 1;
+      letter-spacing: 0.02em;
     }
 
-    .step-body {
-      padding-top: 10px;
+    .step-content {
+      padding-top: 12px;
     }
 
-    .step-title {
+    .step-content h3 {
       font-size: 1.05rem;
       font-weight: 700;
-      color: var(--white);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
     }
 
-    .step-text {
+    .step-content p {
       font-size: 0.9rem;
       color: var(--gray-400);
       line-height: 1.65;
     }
 
-    .step-time {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: #74aaee;
-      background: rgba(34, 85, 164, 0.1);
-      border: 1px solid rgba(34, 85, 164, 0.25);
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-bottom: 10px;
+    /* ─── REVIEWS ─────────────────────────────────────── */
+    .reviews {
+      padding-top: 88px;
+      padding-bottom: 88px;
     }
 
-    /* ─── DIFERENCIACIÓN ──────────────────────────────── */
-    #diferenciacion {
-      background: var(--black);
+    .reviews h2 {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 48px;
     }
 
-    .diff-grid {
-      margin-top: 48px;
+    .reviews-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
 
-    .diff-not {
-      background: #130e0e;
-      border: 1px solid rgba(224, 85, 85, 0.15);
-      border-radius: 10px;
+    @media (max-width: 560px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+
+    .review-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
       padding: 24px;
     }
 
-    .diff-is {
-      background: #0a130e;
-      border: 1px solid rgba(15, 122, 62, 0.2);
-      border-radius: 10px;
-      padding: 24px;
-      grid-column: 1 / -1;
-    }
-
-    .diff-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .diff-label.red { color: #e05555; }
-    .diff-label.green { color: #3dc878; }
-
-    .diff-list {
-      list-style: none;
+    .review-stars {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      gap: 3px;
+      margin-bottom: 14px;
+      color: #f59e0b;
+      font-size: 0.85rem;
     }
 
-    .diff-list li {
+    .review-text {
       font-size: 0.9rem;
       color: var(--gray-400);
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      line-height: 1.5;
+      line-height: 1.65;
+      margin-bottom: 18px;
+      font-style: italic;
     }
 
-    .diff-list li::before {
-      content: '×';
-      font-size: 1rem;
-      font-weight: 700;
-      color: #e05555;
-      flex-shrink: 0;
-      margin-top: 0;
-      line-height: 1.5;
-    }
-
-    .diff-list.green li::before {
-      content: '→';
-      color: #3dc878;
-    }
-
-    .diff-is .diff-list li {
-      color: var(--white);
-      font-size: 0.95rem;
-    }
-
-    /* ─── PRICING ─────────────────────────────────────── */
-    #pricing {
-      background: #080d11;
-    }
-
-    .pricing-card {
-      margin-top: 56px;
-      background: #0e1821;
-      border: 1px solid rgba(34, 85, 164, 0.3);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    .pricing-header {
-      background: var(--accent);
-      padding: 28px 36px;
+    .review-author {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .pricing-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 6px;
-    }
-
-    .pricing-title {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--white);
-    }
-
-    .pricing-amounts {
-      display: flex;
-      align-items: flex-end;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .price-block {
-      text-align: right;
-    }
-
-    .price-small {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 2px;
-    }
-
-    .price-big {
-      font-size: 2.2rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      color: var(--white);
-      line-height: 1;
-    }
-
-    .price-period {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.5);
-    }
-
-    .pricing-body {
-      padding: 36px;
-    }
-
-    .pricing-features {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-
-    .pricing-features li {
-      font-size: 0.9rem;
-      color: var(--gray-400);
-      display: flex;
-      align-items: flex-start;
       gap: 10px;
-      line-height: 1.5;
     }
 
-    .pricing-features li::before {
-      content: '✓';
-      color: #3dc878;
-      font-weight: 700;
-      flex-shrink: 0;
-      line-height: 1.5;
-    }
-
-    .pricing-guarantee {
-      background: rgba(15, 122, 62, 0.08);
-      border: 1px solid rgba(15, 122, 62, 0.2);
-      border-radius: 10px;
-      padding: 20px 24px;
+    .review-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(34,85,164,0.25);
+      border: 1px solid rgba(34,85,164,0.3);
       display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      margin-bottom: 32px;
-    }
-
-    .guarantee-icon {
-      font-size: 1.6rem;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-light);
       flex-shrink: 0;
     }
 
-    .guarantee-text {
-      font-size: 0.9rem;
-      color: var(--gray-400);
-      line-height: 1.6;
+    .review-name {
+      font-size: 0.85rem;
+      font-weight: 600;
     }
 
-    .guarantee-text strong {
-      color: #3dc878;
-      display: block;
-      font-size: 0.92rem;
-      margin-bottom: 4px;
+    .review-biz {
+      font-size: 0.78rem;
+      color: var(--gray-600);
     }
 
     /* ─── CTA FINAL ───────────────────────────────────── */
-    #demo {
-      background: linear-gradient(180deg, #080d11 0%, #0a0a0a 100%);
+    .cta-final {
+      padding-top: 80px;
+      padding-bottom: 100px;
+      text-align: center;
     }
 
-    .demo-inner {
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .demo-inner .section-title {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-    }
-
-    .form-card {
-      margin-top: 48px;
-      background: #0e0e0e;
+    .cta-box {
+      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 36px;
+      border-radius: 20px;
+      padding: 56px 40px;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      font-size: 1rem;
+      color: var(--gray-400);
+      max-width: 420px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: left;
     }
 
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 12px;
     }
 
-    .form-group {
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-field {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 6px;
     }
 
-    .form-group label {
-      font-size: 0.82rem;
+    .form-field label {
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--gray-400);
       letter-spacing: 0.02em;
     }
 
-    .form-group input {
-      background: #161616;
+    .form-field input {
+      background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 7px;
-      padding: 13px 16px;
+      border-radius: 8px;
+      padding: 11px 14px;
       font-size: 0.95rem;
-      color: var(--white);
       font-family: var(--font);
-      transition: border-color 0.2s;
+      color: var(--white);
       outline: none;
-      width: 100%;
+      transition: border-color 0.2s;
     }
 
-    .form-group input::placeholder {
+    .form-field input::placeholder {
       color: var(--gray-600);
     }
 
-    .form-group input:focus {
-      border-color: var(--accent-light);
-      background: #0f1925;
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: rgba(34,85,164,0.6);
+    }
+
+    .form-field textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 0.95rem;
+      font-family: var(--font);
+      color: var(--white);
+      outline: none;
+      resize: vertical;
+      min-height: 100px;
+      transition: border-color 0.2s;
+    }
+
+    .form-field textarea::placeholder {
+      color: var(--gray-600);
     }
 
     .form-submit {
       width: 100%;
-      padding: 16px;
+      background: var(--white);
+      color: var(--black);
       font-size: 1rem;
       font-weight: 700;
-      background: var(--accent-light);
-      color: var(--white);
+      padding: 14px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      letter-spacing: -0.01em;
       font-family: var(--font);
-      margin-top: 8px;
-      transition: background 0.2s, transform 0.15s;
+      transition: opacity 0.2s, transform 0.2s;
+      margin-top: 4px;
     }
 
     .form-submit:hover {
-      background: #1a44a0;
+      opacity: 0.9;
       transform: translateY(-1px);
     }
 
+    .consultoria-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .consultoria-check:hover {
+      border-color: rgba(34,85,164,0.4);
+      background: rgba(34,85,164,0.05);
+    }
+
+    .consultoria-check input[type="checkbox"] {
+      display: none;
+    }
+
+    .check-box {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      background: transparent;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .consultoria-check input:checked ~ .check-box {
+      background: var(--accent-light);
+      border-color: var(--accent-light);
+    }
+
+    .consultoria-check input:checked ~ .check-box::after {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 9px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translateY(-1px);
+    }
+
+    .check-label {
+      font-size: 0.88rem;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
     .form-note {
-      text-align: center;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--gray-600);
-      margin-top: 14px;
+      text-align: center;
+      margin-top: 4px;
     }
 
     /* ─── FOOTER ──────────────────────────────────────── */
     footer {
-      padding: 40px 24px;
       border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .footer-logo {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-logo img {
-      height: 24px;
-      width: auto;
-      display: block;
-    }
-
-    .footer-logo span { color: var(--accent-light); }
-
-    .footer-copy {
-      font-size: 0.78rem;
+      padding: 28px 24px;
+      text-align: center;
+      font-size: 0.8rem;
       color: var(--gray-600);
-    }
-
-    /* ─── RESPONSIVE ──────────────────────────────────── */
-    @media (max-width: 640px) {
-      .hero-split {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 40px;
-      }
-
-      .hero-right {
-        flex: 0 0 auto;
-        width: 100%;
-      }
-
-      .problem-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .problem-cell.full {
-        grid-column: auto;
-      }
-
-      .diff-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .diff-is {
-        grid-column: auto;
-      }
-
-      .pricing-features {
-        grid-template-columns: 1fr;
-      }
-
-      .pricing-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-      }
-
-      .pricing-amounts {
-        align-items: flex-start;
-      }
-
-      .price-block {
-        text-align: left;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-proof {
-        gap: 28px;
-      }
-
-      .steps::before {
-        left: 23px;
-      }
-
-      footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    /* ─── SUBTLE ANIMATIONS ───────────────────────────── */
-    @media (prefers-reduced-motion: no-preference) {
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-      }
-
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
   </style>
 </head>
@@ -905,407 +659,203 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo"><img src="logo.svg" alt="Nodo Grau logo">Nodo<span>Grau</span></a>
-    <a href="#demo" class="nav-cta">Solicitar demo gratuita</a>
+    <a href="#" class="nav-logo">
+      <img src="logo.svg" alt="Nodo Grau" />
+      Nodo Grau
+    </a>
+    <a href="#cta-final" class="nav-cta">
+      Hablemos
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </nav>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Agencia de automatización</div>
+    <h1>Los procesos manuales<br/>te cuestan <span>más de lo que crees</span></h1>
+    <p>Analizamos tu negocio, identificamos dónde se pierde tiempo y lo automatizamos. Con IA o sin ella — lo que mejor encaje.</p>
+    <a href="#cta-final" class="hero-cta">
+      Cuéntanos tu caso
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
 
-  <!-- ─── 1. HERO ─────────────────────────────────────────── -->
-  <section id="hero">
-    <div class="hero-inner">
-      <div class="hero-split">
-        <div class="hero-left">
-          <div class="hero-tag">Automatización para agencias inmobiliarias · España</div>
-          <h1 class="hero-title">
-            Tu agencia está perdiendo comisiones cada vez que tardas <em>más de 5 minutos</em> en responder un lead
-          </h1>
-          <div class="hero-proof">
-            <div class="proof-item">
-              <span class="proof-number">&lt;2 min</span>
-              <span class="proof-label">Tiempo de respuesta automático, 24/7</span>
-            </div>
-            <div class="proof-item">
-              <span class="proof-number">78%</span>
-              <span class="proof-label">De compradores elige al primer agente que contesta</span>
-            </div>
-            <div class="proof-item">
-              <span class="proof-number">35%</span>
-              <span class="proof-label">De leads llega fuera del horario de oficina</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-right">
-          <div class="form-card" style="margin-top: 0;">
-            <h3 class="hero-form-title">20 minutos para ver el sistema en funcionamiento</h3>
-            <p class="hero-form-desc">Sin pitch de ventas. Te mostramos exactamente cómo respondería el sistema a un lead real de tu agencia — y te decimos sin rodeos si tiene sentido para vosotros.</p>
-            <form id="demo-form" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleSubmit(event)">
-              <input type="hidden" name="access_key" value="d39773a3-5cf7-4423-b427-43419ac4275a" />
-              <input type="hidden" name="subject" value="Nueva solicitud de demo — Nodo Grau" />
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="nombre">Nombre</label>
-                  <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
-                </div>
-                <div class="form-group">
-                  <label for="agencia">Agencia</label>
-                  <input type="text" id="agencia" name="agencia" placeholder="Nombre de tu agencia" required />
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" placeholder="tu@agencia.es" required />
-                </div>
-                <div class="form-group">
-                  <label for="telefono">Teléfono</label>
-                  <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000" required />
-                </div>
-              </div>
-              <button type="submit" class="form-submit">
-                Solicitar demo gratuita de 20 minutos →
-              </button>
-            </form>
-            <p class="form-note">Sin compromiso. Sin coste. Te contactamos en menos de 24 horas.</p>
-          </div>
-        </div>
+  <hr class="divider" />
+
+  <!-- PROBLEMA -->
+  <section class="problema">
+    <p class="section-label">El problema</p>
+    <h2>Cuántas horas a la semana<br/>dedicas a tareas repetitivas?</h2>
+    <p>Responder los mismos mensajes, mover datos entre herramientas, actualizar hojas de cálculo, enviar recordatorios a mano... Cada hora que tú o tu equipo gastáis en eso es una hora que no estáis haciendo lo que realmente hace crecer el negocio.</p>
+    <p>El problema no es la falta de disciplina. Es que nadie os ha dicho qué se puede automatizar, ni cómo.</p>
+    <ul class="pain-list">
+      <li>Tareas que se repiten igual cada día o cada semana</li>
+      <li>Información que hay que copiar de un sitio a otro a mano</li>
+      <li>Seguimiento de clientes que depende de que alguien se acuerde</li>
+      <li>Respuestas tardías porque no hay un sistema detrás</li>
+      <li>Errores humanos en procesos que podrían ser automáticos</li>
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SOLUCION -->
+  <section class="solucion">
+    <p class="section-label">Lo que hacemos</p>
+    <h2>Automatización a medida,<br/>no soluciones genéricas</h2>
+    <p class="lead">No vendemos software. Construimos sistemas específicos para tu negocio: conectamos tus herramientas, eliminamos los pasos manuales y dejamos todo funcionando sin que tengas que tocarlo.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <h3>Automatización de procesos</h3>
+        <p>Flujos que mueven información, generan documentos, envían notificaciones y coordinan tu equipo sin intervención manual.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h3>Automatización con IA</h3>
+        <p>Cuando la tarea requiere leer, clasificar, redactar o tomar decisiones, integramos modelos de lenguaje que lo hacen solos.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <h3>Integración de herramientas</h3>
+        <p>CRM, correo, WhatsApp, hojas de cálculo, ERPs — los conectamos para que los datos fluyan solos entre sistemas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Sistemas de seguimiento</h3>
+        <p>Paneles y alertas automáticas para que siempre sepas el estado de tu operación sin tener que preguntar.</p>
       </div>
     </div>
   </section>
-  <span id="demo"></span>
 
+  <hr class="divider" />
 
-  <!-- ─── 2. PROBLEMA ──────────────────────────────────────── -->
-  <section id="problema" class="section-full">
-    <div class="section" style="padding-top: 0; padding-bottom: 0;">
-      <p class="section-label">El problema</p>
-      <h2 class="section-title">El cubo perforado: pagas por agua, pero se escapa por los lados</h2>
-      <p class="section-lead">
-        Tienes Idealista y Fotocasa activos. Los leads entran.
-        Pero hay dos agujeros que drenan silenciosamente tu inversión cada día.
-      </p>
-
-      <div class="problem-grid fade-in">
-        <div class="problem-cell">
-          <div class="problem-stat red">35%</div>
-          <div class="problem-desc">
-            <strong>de los leads llega fuera de horario.</strong>
-            Un domingo por la tarde, las 11 de la noche, en mitad de una visita.
-            Nadie responde. El lead se enfría.
-          </div>
+  <!-- COMO FUNCIONA -->
+  <section class="como">
+    <p class="section-label">Cómo funciona</p>
+    <h2>Simple. Sin complicaciones técnicas<br/>de tu parte.</h2>
+    <p>Te preguntas qué tienes que hacer tú para que esto funcione. La respuesta honesta: contarnos cómo trabajas.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Diagnóstico</h3>
+          <p>Nos cuentas cómo funciona tu negocio hoy — qué haces, con qué herramientas, dónde ves que se pierde tiempo. Nosotros identificamos qué se puede automatizar y cuánto impacto tendría.</p>
         </div>
-        <div class="problem-cell">
-          <div class="problem-stat amber">50%</div>
-          <div class="problem-desc">
-            <strong>ya ha elegido a otro agente</strong> antes de que alguien del equipo
-            les llame por primera vez. No porque no les interesaba el piso —
-            sino porque otro fue más rápido.
-          </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Propuesta concreta</h3>
+          <p>Te explicamos exactamente qué vamos a construir, cómo va a funcionar y qué resultado puedes esperar. Sin tecnicismos, sin ambigüedades.</p>
         </div>
-        <div class="problem-cell full">
-          <p class="problem-conclusion">
-            No te faltan leads. <em>Se enfrían antes de que llegues a ellos.</em><br />
-            Cada lead no respondido en menos de 5 minutos es una comisión que se va
-            a la competencia — aunque hayas pagado por ese lead exactamente igual que ellos.
-          </p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Implementación y entrega</h3>
+          <p>Construimos el sistema, lo probamos contigo y te lo entregamos funcionando. Seguimos disponibles si algo cambia o necesitas ajustes.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <hr class="divider" />
 
-  <!-- ─── 3. SOLUCIONES FALLIDAS ───────────────────────────── -->
-  <section id="soluciones" class="section-full">
-    <div class="section" style="padding-top: 0; padding-bottom: 0;">
-      <p class="section-label">Por qué no ha funcionado lo que ya has probado</p>
-      <h2 class="section-title">Las tres respuestas habituales — y por qué no resuelven nada</h2>
-
-      <div class="fail-cards fade-in">
-
-        <div class="fail-card">
-          <div class="fail-icon">
-            <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <p class="section-label">Clientes</p>
+    <h2>Lo que dicen quienes<br/>ya trabajan con nosotros</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Llevábamos años haciendo lo mismo a mano. En dos semanas teníamos un sistema que lo hacía solo. El equipo no podía creerlo."</p>
+        <div class="review-author">
+          <div class="review-avatar">MR</div>
           <div>
-            <div class="fail-title">
-              Contratar más personal
-              <span class="fail-badge">No escala</span>
-            </div>
-            <p class="fail-text">
-              Más nóminas, más gestión, más coordinación. Y el problema de fondo
-              sigue igual: cuando ese agente nuevo está en una visita o no está de guardia,
-              los leads del sábado por la noche siguen sin respuesta.
-              El cubo tiene más manos tapando agujeros, pero sigue perdiendo agua.
-            </p>
+            <div class="review-name">María R.</div>
+            <div class="review-biz">Clínica dental, Valencia</div>
           </div>
         </div>
-
-        <div class="fail-card">
-          <div class="fail-icon">
-            <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-              <line x1="8" y1="21" x2="16" y2="21"/>
-              <line x1="12" y1="17" x2="12" y2="21"/>
-            </svg>
-          </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"El seguimiento de presupuestos lo hacíamos a mano en Excel. Ahora es automático y nunca se nos escapa un cliente."</p>
+        <div class="review-author">
+          <div class="review-avatar">JM</div>
           <div>
-            <div class="fail-title">
-              Implementar un CRM inmobiliario
-              <span class="fail-badge">Depende de ti</span>
-            </div>
-            <p class="fail-text">
-              Un CRM es un archivador muy caro que solo funciona si alguien lo alimenta.
-              Organiza lo que ya existe, pero no actúa por sí solo.
-              Si el agente no entra a actualizar el estado, el lead sigue en limbo.
-              Y si el agente no tiene tiempo, el CRM no llama al cliente por él.
-            </p>
+            <div class="review-name">Jordi M.</div>
+            <div class="review-biz">Empresa de reformas, Barcelona</div>
           </div>
         </div>
-
-        <div class="fail-card">
-          <div class="fail-icon">
-            <svg fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/>
-            </svg>
-          </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Recibimos muchas consultas por WhatsApp e Instagram. Ahora hay un flujo que las gestiona, responde y las clasifica sin que nadie las mire."</p>
+        <div class="review-author">
+          <div class="review-avatar">CL</div>
           <div>
-            <div class="fail-title">
-              Formación en ventas para el equipo
-              <span class="fail-badge">Fuera de contexto</span>
-            </div>
-            <p class="fail-text">
-              Mejor técnica de cierre, mejores preguntas de cualificación.
-              Todo eso funciona cuando hay alguien al teléfono.
-              Pero ningún curso de ventas hace que tu equipo esté disponible
-              a las 11 de la noche cuando entra un lead de Fotocasa.
-            </p>
+            <div class="review-name">Carmen L.</div>
+            <div class="review-biz">Tienda online, Madrid</div>
           </div>
         </div>
-
       </div>
-    </div>
-  </section>
-
-
-  <!-- ─── 4. MECANISMO ──────────────────────────────────────── -->
-  <section id="mecanismo" class="section-full">
-    <div class="section" style="padding-top: 0; padding-bottom: 0;">
-      <p class="section-label">Cómo funciona</p>
-      <h2 class="section-title">El sistema responde mientras tú estás en una visita</h2>
-      <p class="section-lead">
-        Cuatro pasos automáticos desde que el lead entra hasta que tienes la visita en el calendario.
-        Sin que toques nada.
-      </p>
-
-      <div class="steps fade-in">
-
-        <div class="step">
-          <div class="step-num">01</div>
-          <div class="step-body">
-            <div class="step-time">En los primeros 90 segundos</div>
-            <div class="step-title">Respuesta inmediata por WhatsApp Business</div>
-            <p class="step-text">
-              El lead entra desde Idealista o Fotocasa — a las 9 de la mañana o a las 11 de la noche.
-              El sistema envía un mensaje personalizado con el nombre del inmueble y la agencia
-              en menos de dos minutos. El comprador recibe respuesta antes de que haya cerrado
-              la aplicación.
-            </p>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">02</div>
-          <div class="step-body">
-            <div class="step-time">Cualificación automática</div>
-            <div class="step-title">Tres preguntas que filtran el interés real</div>
-            <p class="step-text">
-              El sistema cualifica al lead con tres preguntas clave adaptadas a tu mercado:
-              plazo de compra, situación financiera y zona de interés.
-              Solo los leads cualificados llegan a tu bandeja. Los curiosos que no están listos
-              quedan registrados para seguimiento posterior.
-            </p>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">03</div>
-          <div class="step-body">
-            <div class="step-time">Sin fricción para el comprador</div>
-            <div class="step-title">Responde dudas sobre el inmueble automáticamente</div>
-            <p class="step-text">
-              Precio, superficie, distribución, gastos de comunidad.
-              El sistema tiene la información de cada inmueble y responde las preguntas más comunes
-              sin que el agente intervenga. El lead avanza sin esperar.
-            </p>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">04</div>
-          <div class="step-body">
-            <div class="step-time">Visita en el calendario</div>
-            <div class="step-title">Agenda directamente en el hueco disponible</div>
-            <p class="step-text">
-              Si el lead está listo, el sistema propone horarios reales del agente responsable
-              y confirma la cita sin intervención humana. Sin tocar el CRM que ya tienes.
-              Sin cambiar el flujo de trabajo del equipo.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─── 5. DIFERENCIACIÓN ─────────────────────────────────── -->
-  <section id="diferenciacion" class="section-full">
-    <div class="section" style="padding-top: 0; padding-bottom: 0;">
-      <p class="section-label">Qué es y qué no es</p>
-      <h2 class="section-title">No es otra herramienta que añadir a la pila</h2>
-
-      <div class="diff-grid fade-in">
-
-        <div class="diff-not">
-          <div class="diff-label red">No es</div>
-          <ul class="diff-list">
-            <li>Un CRM nuevo que aprender a usar</li>
-            <li>Un generador de leads</li>
-            <li>IA que escribe anuncios o contenido</li>
-          </ul>
-        </div>
-
-        <div class="diff-not">
-          <div class="diff-label red">No requiere</div>
-          <ul class="diff-list">
-            <li>Cambiar tu flujo de trabajo actual</li>
-            <li>Migrar datos de tu CRM actual</li>
-            <li>Formación del equipo</li>
-          </ul>
-        </div>
-
-        <div class="diff-is">
-          <div class="diff-label green">Sí es</div>
-          <ul class="diff-list green">
-            <li>Flujos de ejecución proactiva que se montan sobre lo que ya usas</li>
-            <li>Automatización que actúa antes de que el agente pueda hacerlo</li>
-            <li>Integración con WhatsApp Business, Idealista, Fotocasa y tu calendario</li>
-            <li>Un sistema que trabaja en paralelo a tu equipo, no en lugar de él</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─── 6. PRICING ────────────────────────────────────────── -->
-  <section id="pricing" class="section-full">
-    <div class="section" style="padding-top: 0; padding-bottom: 0;">
-      <p class="section-label">Qué incluye</p>
-      <h2 class="section-title">Todo montado. Sin sorpresas.</h2>
-
-      <div class="pricing-card fade-in">
-        <div class="pricing-header">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Lo que más me sorprendió fue lo rápido que entendieron cómo funciona mi negocio. No tuve que explicar nada técnico."</p>
+        <div class="review-author">
+          <div class="review-avatar">PG</div>
           <div>
-            <div class="pricing-name">Plan único</div>
-            <div class="pricing-title">Sistema de respuesta automática completo</div>
+            <div class="review-name">Pablo G.</div>
+            <div class="review-biz">Gestoría, Bilbao</div>
           </div>
-        </div>
-
-        <div class="pricing-body">
-          <ul class="pricing-features">
-            <li>Respuesta automática en WhatsApp Business</li>
-            <li>Integración con Idealista y Fotocasa</li>
-            <li>Cualificación automática de leads</li>
-            <li>Agendado directo en el calendario del agente</li>
-            <li>Respuestas automáticas a preguntas frecuentes</li>
-            <li>Sin migración de CRM ni cambio de herramientas</li>
-            <li>Configuración completa por parte de Nodo Grau</li>
-            <li>Soporte técnico continuo</li>
-          </ul>
-
-          <div class="pricing-guarantee">
-            <div class="guarantee-icon">🛡</div>
-            <div class="guarantee-text">
-              <strong>Garantía de rendimiento — sin letra pequeña</strong>
-              Si el sistema no responde el 95% de los leads en menos de 2 minutos durante los
-              primeros 30 días de funcionamiento, devolvemos el setup íntegro.
-              No hace falta justificar nada.
-            </div>
-          </div>
-
-          <a href="#demo" class="btn-primary" style="display: block; text-align: center;">
-            Solicita una demo gratuita de 20 minutos
-          </a>
         </div>
       </div>
     </div>
   </section>
 
-
-
+  <!-- CTA FINAL -->
+  <section id="cta-final" class="cta-final">
+    <div class="cta-box">
+      <h2>¿Qué podrías dejar<br/>de hacer a mano?</h2>
+      <p>Cuéntanos cómo funciona tu negocio. Miramos juntos qué tiene sentido automatizar y te decimos qué se puede hacer.</p>
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="d39773a3-5cf7-4423-b427-43419ac4275a" />
+        <input type="hidden" name="subject" value="Nuevo contacto — Nodo Grau" />
+        <input type="checkbox" name="botcheck" style="display:none" />
+        <div class="form-row">
+          <div class="form-field">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-field">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" name="phone" placeholder="+34 600 000 000" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@empresa.com" required />
+        </div>
+        <div class="form-field">
+          <label for="problema">¿Qué quieres automatizar? <span style="color:var(--gray-600);font-weight:400">(opcional)</span></label>
+          <textarea id="problema" name="problema" placeholder="Describe brevemente el proceso o tarea que te gustaría dejar de hacer a mano..."></textarea>
+        </div>
+        <label class="consultoria-check">
+          <input type="checkbox" name="consultoria" value="Sí" />
+          <span class="check-box"></span>
+          <span class="check-label">No tengo claro qué automatizar — quiero una consultoría gratuita</span>
+        </label>
+        <button type="submit" class="form-submit">Quiero que me contactéis →</button>
+        <p class="form-note">Sin spam. Solo nos ponemos en contacto si tiene sentido para tu negocio.</p>
+      </form>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo"><img src="logo.svg" alt="Nodo Grau logo">Nodo<span>Grau</span></div>
-    <div class="footer-copy">© 2026 Nodo Grau. Automatización para agencias inmobiliarias en España.</div>
+    <p>© 2025 Nodo Grau. Todos los derechos reservados.</p>
   </footer>
-
-
-  <script>
-    // Scroll-based fade-in
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    async function handleSubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const btn = form.querySelector('.form-submit');
-      const originalText = btn.textContent;
-
-      btn.textContent = 'Enviando...';
-      btn.disabled = true;
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        const data = await res.json();
-        if (data.success) {
-          btn.textContent = '✓ Solicitud enviada — te contactamos pronto';
-          btn.style.background = '#0f7a3e';
-          form.reset();
-        } else {
-          throw new Error('Error');
-        }
-      } catch {
-        btn.textContent = 'Error al enviar — escríbenos a hola@nodograu.com';
-        btn.style.background = '#c0392b';
-        btn.disabled = false;
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 4000);
-      }
-    }
-  </script>
 
 </body>
 </html>
