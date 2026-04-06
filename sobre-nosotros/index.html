@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre nosotros — Nodo Grau</title>
+  <meta name="description" content="Nodo Grau es Edgar Grau, especialista en automatización de procesos con sede en Barcelona. Sistemático por naturaleza, construye sistemas específicos para cada negocio." />
+  <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <meta property="og:title" content="Sobre nosotros — Nodo Grau" />
+  <meta property="og:description" content="Quién hay detrás de Nodo Grau y por qué existe." />
+  <meta property="og:image" content="https://nodograu.com/android-chrome-512x512.png" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a; --white: #ffffff;
+      --gray-400: #9a9a9a; --gray-600: #5a5a5a; --gray-800: #2a2a2a;
+      --accent: #1a3a5c; --accent-light: #2255a4; --accent-glow: rgba(34,85,164,0.12);
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--black); color: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-logo { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 26px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-link { font-size: 0.875rem; font-weight: 500; color: var(--gray-400); text-decoration: none; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--white); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--white); color: var(--black); font-size: 0.85rem; font-weight: 700; padding: 9px 18px; border-radius: 8px; text-decoration: none; letter-spacing: -0.01em; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+    @media (max-width: 600px) { .nav-links { display: none; } }
+
+    /* LAYOUT */
+    section { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .divider { width: 100%; max-width: 760px; margin: 0 auto; border: none; border-top: 1px solid rgba(255,255,255,0.07); }
+
+    /* HERO */
+    .hero { padding-top: 140px; padding-bottom: 72px; }
+    .hero-tag { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-light); border: 1px solid rgba(34,85,164,0.35); background: var(--accent-glow); padding: 5px 14px; border-radius: 100px; margin-bottom: 28px; }
+    .hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .hero-lead { font-size: 1.1rem; color: var(--gray-400); max-width: 540px; line-height: 1.75; }
+
+    /* PERFIL */
+    .perfil { padding-top: 72px; padding-bottom: 72px; }
+    .perfil-card {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 28px;
+      align-items: start;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 480px) { .perfil-card { grid-template-columns: 1fr; } }
+    .perfil-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(34,85,164,0.2);
+      border: 1px solid rgba(34,85,164,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent-light);
+      flex-shrink: 0;
+      letter-spacing: -0.02em;
+    }
+    .perfil-info { padding-top: 4px; }
+    .perfil-name { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+    .perfil-role { font-size: 0.85rem; color: var(--accent-light); font-weight: 600; margin-bottom: 12px; }
+    .perfil-details { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+    .perfil-detail { font-size: 0.8rem; color: var(--gray-600); display: flex; align-items: center; gap: 5px; }
+    .perfil-bio { font-size: 0.95rem; color: var(--gray-400); line-height: 1.7; }
+
+    /* SECCIONES */
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-600); margin-bottom: 18px; }
+    .content-section { padding-top: 72px; padding-bottom: 72px; }
+    .content-section h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.025em; margin-bottom: 20px; }
+    .content-section p { font-size: 1rem; color: var(--gray-400); line-height: 1.75; margin-bottom: 16px; max-width: 620px; }
+    .content-section p:last-child { margin-bottom: 0; }
+
+    /* VALORES */
+    .valores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+    @media (max-width: 560px) { .valores-grid { grid-template-columns: 1fr; } }
+    .valor-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px; }
+    .valor-icon { font-size: 1.2rem; margin-bottom: 12px; }
+    .valor-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .valor-card p { font-size: 0.875rem; color: var(--gray-400); line-height: 1.6; margin-bottom: 0; }
+
+    /* HERRAMIENTAS MARQUEE */
+    .tools-marquee-wrap {
+      margin-top: 36px;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+    .tools-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      animation: marquee-scroll 28s linear infinite;
+    }
+    .tools-track:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .tool-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 10px 16px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tool-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .tool-chip span {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gray-400);
+    }
+
+    /* CTA */
+    .cta-final { padding-top: 0; padding-bottom: 100px; }
+    .cta-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 56px 40px; text-align: center; }
+    @media (max-width: 560px) { .cta-box { padding: 40px 24px; } }
+    .cta-box h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .cta-box p { font-size: 1rem; color: var(--gray-400); max-width: 400px; margin: 0 auto 32px; line-height: 1.7; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--black); font-size: 1rem; font-weight: 700; padding: 14px 28px; border-radius: 10px; text-decoration: none; letter-spacing: -0.01em; transition: opacity 0.2s, transform 0.2s; }
+    .cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 28px 24px; text-align: center; font-size: 0.8rem; color: var(--gray-600); }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 10px; flex-wrap: wrap; }
+    .footer-links a { color: var(--gray-600); text-decoration: none; }
+    .footer-links a:hover { color: var(--gray-400); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="../logo.svg" alt="Nodo Grau" />
+      Nodo Grau
+    </a>
+    <div class="nav-links">
+      <a href="/casos/" class="nav-link">Casos</a>
+      <a href="/sobre-nosotros/" class="nav-link active">Sobre nosotros</a>
+    </div>
+    <a href="/#cta-final" class="nav-cta">
+      Hablemos
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Sobre nosotros</div>
+    <h1>Sistemático por naturaleza.<br/>Constructor por vocación.</h1>
+    <p class="hero-lead">Nodo Grau no es una agencia de software ni una consultora. Es una persona que ve un proceso manual y no puede evitar pensar en cómo eliminarlo.</p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PERFIL -->
+  <section class="perfil">
+    <div class="perfil-card">
+      <div class="perfil-avatar">EG</div>
+      <div class="perfil-info">
+        <div class="perfil-name">Edgar Grau</div>
+        <div class="perfil-role">Fundador de Nodo Grau</div>
+        <div class="perfil-details">
+          <span class="perfil-detail">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1C3.79 1 2 2.79 2 5c0 3 4 7 4 7s4-4 4-7c0-2.21-1.79-4-4-4zm0 5.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="currentColor"/></svg>
+            Barcelona
+          </span>
+          <span class="perfil-detail">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5V6l1.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            30 años
+          </span>
+        </div>
+        <p class="perfil-bio">Llevo años construyendo sistemas para que los negocios funcionen mejor sin que nadie tenga que hacer lo mismo dos veces. Empecé automatizando procesos internos en empresas donde trabajé, y en algún momento me di cuenta de que eso era lo que quería hacer, pero para otros.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- LA HISTORIA -->
+  <section class="content-section">
+    <p class="section-label">Por qué existe Nodo Grau</p>
+    <h2>Siempre me molestó hacer<br/>lo mismo más de una vez</h2>
+    <p>No es una figura retórica. Desde pequeño tenía una tendencia a buscar el atajo, la forma de hacer algo una vez y que funcionara siempre. No por vagancia — sino porque repetir lo mismo sin pensar me parece un desperdicio de lo que puede hacer una persona.</p>
+    <p>Trabajando en distintos entornos empresariales vi el mismo patrón una y otra vez: equipos inteligentes dedicando horas a mover datos de un sitio a otro, a responder los mismos mensajes, a actualizar hojas que podrían actualizarse solas. Nadie lo cuestionaba porque siempre había sido así.</p>
+    <p>Nodo Grau nació de la convicción de que la mayoría de esos procesos tienen solución. No siempre con tecnología cara ni con grandes proyectos. A veces con un flujo bien diseñado y las herramientas adecuadas. Lo difícil no es la técnica — es saber exactamente qué automatizar y cómo hacerlo sin romper lo que ya funciona.</p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- FILOSOFÍA -->
+  <section class="content-section">
+    <p class="section-label">Cómo pienso sobre esto</p>
+    <h2>Con IA, la pregunta ya no es<br/>si se puede. Es si vale la pena.</h2>
+    <p>Durante años, la línea estaba clara: los procesos repetitivos se automatizaban, los que requerían criterio humano no. Esa línea ya no existe. Con los modelos de lenguaje actuales, leer un contrato, clasificar una intención, redactar una respuesta contextualizada o tomar una decisión basada en reglas complejas — todo eso se puede delegar a una máquina.</p>
+    <p>Lo que antes era imposible sin una persona ahora es una integración. Eso cambia completamente el tipo de preguntas que hago cuando analizo un negocio. Ya no es "¿esto puede automatizarse?" — casi siempre puede. La pregunta real es "¿cuánto impacto tiene y tiene sentido hacerlo ahora?"</p>
+    <p>Por eso el primer paso siempre es mapear la operación completa, no proponer una solución. Llego sin ideas preconcebidas. Escucho, entiendo el flujo real y priorizo por impacto. Si algo no tiene retorno claro, lo digo antes de empezar. Prefiero no cerrar un proyecto a entregar algo que no cambia nada.</p>
+    <div class="valores-grid">
+      <div class="valor-card">
+        <div class="valor-icon">⚙️</div>
+        <h3>Sistemas, no soluciones puntuales</h3>
+        <p>No arreglo un problema de hoy. Construyo algo que funcione mañana y en seis meses, y que se adapte cuando tu negocio cambie.</p>
+      </div>
+      <div class="valor-card">
+        <div class="valor-icon">🔍</div>
+        <h3>Diagnóstico antes que propuesta</h3>
+        <p>Primero entiendo cómo funciona tu negocio. La solución viene después, no antes de escuchar.</p>
+      </div>
+      <div class="valor-card">
+        <div class="valor-icon">📐</div>
+        <h3>A medida, no genérico</h3>
+        <p>No hay dos negocios iguales. No hay dos automatizaciones iguales. Lo que construyo para ti no sirve para otro — y eso es exactamente lo que quieres.</p>
+      </div>
+      <div class="valor-card">
+        <div class="valor-icon">🤝</div>
+        <h3>Honestidad sobre lo que es posible</h3>
+        <p>Si algo no se puede automatizar, o si el impacto no justifica el esfuerzo, lo digo antes de empezar. Sin rodeos.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- HERRAMIENTAS -->
+  <section class="content-section">
+    <p class="section-label">Cómo lo construyo</p>
+    <h2>Sin código innecesario.<br/>Con las herramientas que ya existen.</h2>
+    <p>La mayoría de automatizaciones no necesitan desarrollo de software a medida. Existen herramientas diseñadas específicamente para conectar sistemas, mover datos y ejecutar lógica condicional sin escribir código desde cero.</p>
+    <p>Eso significa que los proyectos se implementan más rápido, son más fáciles de mantener y, si algo cambia en tu negocio, se adaptan sin tener que reescribir nada. Cuando un proyecto sí requiere código, lo escribo — pero solo si aporta algo que las herramientas existentes no pueden dar.</p>
+    <div class="tools-marquee-wrap">
+      <div class="tools-track">
+        <!-- primera copia -->
+        <div class="tool-chip"><div class="tool-dot" style="background:#FF6B35"></div><span>Make</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#EA4B71"></div><span>n8n</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#10A37F"></div><span>OpenAI</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#D97557"></div><span>Claude</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#34A853"></div><span>Google Sheets</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#25D366"></div><span>WhatsApp API</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#EA4335"></div><span>Gmail</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#FCB400"></div><span>Airtable</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#ffffff"></div><span>Notion</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#4A154B"></div><span>Slack</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#FF4A00"></div><span>Zapier</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#3776AB"></div><span>Python</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#2255a4"></div><span>Webhooks</span></div>
+        <!-- segunda copia para loop seamless -->
+        <div class="tool-chip"><div class="tool-dot" style="background:#FF6B35"></div><span>Make</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#EA4B71"></div><span>n8n</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#10A37F"></div><span>OpenAI</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#D97557"></div><span>Claude</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#34A853"></div><span>Google Sheets</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#25D366"></div><span>WhatsApp API</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#EA4335"></div><span>Gmail</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#FCB400"></div><span>Airtable</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#ffffff"></div><span>Notion</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#4A154B"></div><span>Slack</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#FF4A00"></div><span>Zapier</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#3776AB"></div><span>Python</span></div>
+        <div class="tool-chip"><div class="tool-dot" style="background:#2255a4"></div><span>Webhooks</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- COMO TRABAJO -->
+  <section class="content-section" style="padding-bottom:88px;">
+    <p class="section-label">Cómo trabajo con los clientes</p>
+    <h2>Proyecto cerrado, sin sorpresas<br/>ni tecnicismos.</h2>
+    <p>El trabajo empieza con una conversación, no con una propuesta. Primero entiendo cómo funciona tu negocio hoy, qué procesos tiene y dónde se pierde tiempo. Solo después propongo qué se puede automatizar y cómo.</p>
+    <p>El presupuesto es cerrado: alcance definido, precio fijo, sin sorpresas al final. Sabes exactamente qué vas a recibir antes de aprobar nada. La mayoría de proyectos se implementan en dos a cuatro semanas.</p>
+    <p>Una vez entregado, sigo disponible. Los sistemas evolucionan con el negocio, y siempre es mejor tener a alguien que ya conoce la operación cuando algo cambia o aparece una mejora.</p>
+  </section>
+
+  <section class="cta-final">
+    <div class="cta-box">
+      <h2>¿Tienes un proceso<br/>que te gustaría dejar de hacer?</h2>
+      <p>Cuéntame cómo funciona hoy. Si tiene solución, te digo cuál es y cuánto cuesta. Si no la tiene, también te lo digo.</p>
+      <a href="/#cta-final" class="cta-btn">
+        Cuéntanos tu caso
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/casos/">Casos</a>
+      <a href="/sobre-nosotros/">Sobre nosotros</a>
+    </div>
+    <p>© 2025 Nodo Grau. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>

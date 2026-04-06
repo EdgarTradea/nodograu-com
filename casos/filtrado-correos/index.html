@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clasificación automática de correos en gestoría — Nodo Grau</title>
+  <meta name="description" content="100 correos al día, 70% gestionados automáticamente. Cómo implementamos un sistema de filtrado y respuesta con IA para una gestoría en Bilbao." />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+  <link rel="manifest" href="../../site.webmanifest" />
+  <meta property="og:title" content="Clasificación automática de correos en gestoría — Nodo Grau" />
+  <meta property="og:description" content="70% de los correos gestionados sin intervención humana." />
+  <meta property="og:image" content="https://nodograu.com/android-chrome-512x512.png" />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black: #0a0a0a; --white: #ffffff; --gray-400: #9a9a9a; --gray-600: #5a5a5a; --gray-800: #2a2a2a; --accent: #1a3a5c; --accent-light: #2255a4; --accent-glow: rgba(34,85,164,0.12); --font: 'Inter', system-ui, -apple-system, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--black); color: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-logo { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 26px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-link { font-size: 0.875rem; font-weight: 500; color: var(--gray-400); text-decoration: none; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--white); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--white); color: var(--black); font-size: 0.85rem; font-weight: 700; padding: 9px 18px; border-radius: 8px; text-decoration: none; letter-spacing: -0.01em; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+    @media (max-width: 600px) { .nav-links { display: none; } }
+    section { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .divider { width: 100%; max-width: 760px; margin: 0 auto; border: none; border-top: 1px solid rgba(255,255,255,0.07); }
+    .breadcrumb { padding-top: 108px; display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--gray-600); flex-wrap: wrap; }
+    .breadcrumb a { color: var(--gray-600); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--gray-400); }
+    .hero { padding-top: 28px; padding-bottom: 72px; }
+    .hero-tags { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .hero-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); background: var(--accent-glow); border: 1px solid rgba(34,85,164,0.25); padding: 4px 12px; border-radius: 100px; }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .hero-lead { font-size: 1.1rem; color: var(--gray-400); line-height: 1.7; max-width: 580px; margin-bottom: 36px; }
+    .hero-metric-bar { display: flex; gap: 32px; flex-wrap: wrap; }
+    .hero-stat { display: flex; flex-direction: column; gap: 4px; }
+    .hero-stat-value { font-size: 2rem; font-weight: 900; letter-spacing: -0.04em; color: var(--white); }
+    .hero-stat-label { font-size: 0.78rem; color: var(--gray-600); }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-600); margin-bottom: 18px; }
+    .content-section { padding-top: 72px; padding-bottom: 72px; }
+    .content-section h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.025em; margin-bottom: 20px; }
+    .content-section p { font-size: 1rem; color: var(--gray-400); line-height: 1.75; margin-bottom: 16px; max-width: 620px; }
+    .content-section p:last-child { margin-bottom: 0; }
+    .pain-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .pain-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: var(--gray-400); line-height: 1.5; }
+    .pain-list li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--gray-600); margin-top: 8px; }
+    .steps { margin-top: 36px; display: flex; flex-direction: column; gap: 0; }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 20px; position: relative; }
+    .step:not(:last-child)::after { content: ''; position: absolute; left: 23px; top: 48px; bottom: -24px; width: 1px; background: rgba(255,255,255,0.08); }
+    .step + .step { padding-top: 32px; }
+    .step-num { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; color: var(--gray-400); flex-shrink: 0; }
+    .step-content { padding-top: 12px; }
+    .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .step-content p { font-size: 0.9rem; color: var(--gray-400); line-height: 1.65; margin-bottom: 0; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+    @media (max-width: 560px) { .metrics { grid-template-columns: 1fr; } }
+    .metric-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px 20px; }
+    .metric-value { font-size: 2rem; font-weight: 900; letter-spacing: -0.04em; color: var(--white); margin-bottom: 6px; }
+    .metric-label { font-size: 0.82rem; color: var(--gray-400); line-height: 1.4; }
+    .quote-block { margin-top: 48px; padding: 28px 32px; background: rgba(34,85,164,0.06); border: 1px solid rgba(34,85,164,0.2); border-radius: 14px; }
+    .quote-text { font-size: 1rem; color: var(--gray-400); line-height: 1.7; font-style: italic; margin-bottom: 16px; }
+    .quote-author { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+    .quote-biz { font-size: 0.78rem; color: var(--gray-600); }
+    .cta-final { padding-top: 0; padding-bottom: 100px; }
+    .cta-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 56px 40px; text-align: center; }
+    @media (max-width: 560px) { .cta-box { padding: 40px 24px; } }
+    .cta-box h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .cta-box p { font-size: 1rem; color: var(--gray-400); max-width: 400px; margin: 0 auto 32px; line-height: 1.7; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--black); font-size: 1rem; font-weight: 700; padding: 14px 28px; border-radius: 10px; text-decoration: none; letter-spacing: -0.01em; transition: opacity 0.2s, transform 0.2s; }
+    .cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 28px 24px; text-align: center; font-size: 0.8rem; color: var(--gray-600); }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 10px; }
+    .footer-links a { color: var(--gray-600); text-decoration: none; }
+    .footer-links a:hover { color: var(--gray-400); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="../../logo.svg" alt="Nodo Grau" />
+      Nodo Grau
+    </a>
+    <div class="nav-links">
+      <a href="/casos/" class="nav-link active">Casos</a>
+      <a href="/sobre-nosotros/" class="nav-link">Sobre nosotros</a>
+    </div>
+    <a href="/#cta-final" class="nav-cta">
+      Hablemos
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <section class="breadcrumb">
+    <a href="/">Inicio</a>
+    <span>›</span>
+    <a href="/casos/">Casos</a>
+    <span>›</span>
+    <span style="color:var(--gray-400)">Clasificación automática de correos en gestoría</span>
+  </section>
+
+  <section class="hero">
+    <div class="hero-tags">
+      <span class="hero-tag">Servicios profesionales</span>
+      <span class="hero-tag">IA + correo</span>
+      <span class="hero-tag">Gmail</span>
+    </div>
+    <h1>Clasificación y respuesta<br/>automática de correos en gestoría</h1>
+    <p class="hero-lead">Más de 100 correos al día en el mismo buzón, sin orden. Urgencias que se perdían entre facturas de proveedores y notificaciones de Hacienda. Construimos un sistema que lee, clasifica y enruta cada correo sin que nadie lo toque.</p>
+    <div class="hero-metric-bar">
+      <div class="hero-stat">
+        <span class="hero-stat-value">70%</span>
+        <span class="hero-stat-label">gestionados automáticamente</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">45min</span>
+        <span class="hero-stat-label">tiempo de respuesta a urgencias</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">0</span>
+        <span class="hero-stat-label">notificaciones importantes sin leer</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="content-section">
+    <p class="section-label">El problema</p>
+    <h2>Un buzón que nadie<br/>podía leer entero</h2>
+    <p>La gestoría acumulaba más de 100 correos diarios: consultas de clientes, facturas de proveedores, notificaciones de la Agencia Tributaria, recordatorios internos, spam y alguna urgencia real mezclada con todo lo anterior.</p>
+    <p>El problema no era el volumen. Era que todo llegaba al mismo sitio sin ningún orden. Para saber si había algo urgente, alguien tenía que leer los asuntos de todos los correos cada vez que abría el buzón. Las urgencias se veían tarde. Los clientes importantes esperaban igual que los que enviaban facturas de 20 euros.</p>
+    <ul class="pain-list">
+      <li>Correos urgentes de clientes enterrados entre notificaciones sin importancia</li>
+      <li>Tiempo de respuesta de 6-8 horas incluso para consultas simples</li>
+      <li>Notificaciones de Hacienda con plazos que se veían tarde porque se confundían con el resto</li>
+      <li>El mismo tipo de consulta respondida manualmente decenas de veces al mes</li>
+      <li>Imposible delegar sin explicar cada tipo de correo uno por uno</li>
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="content-section">
+    <p class="section-label">La solución</p>
+    <h2>Un sistema que lee cada correo<br/>y decide qué hacer con él</h2>
+    <p>Implementamos un sistema conectado a Gmail que analiza cada correo entrante con IA. En menos de un minuto desde que llega, el correo ya tiene una categoría, una etiqueta y, si procede, un destinatario o un borrador de respuesta.</p>
+    <p>El equipo solo ve lo que necesita ver. Las urgencias llegan marcadas. Las consultas frecuentes tienen ya un borrador que solo hay que revisar y enviar.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Lectura y clasificación</h3>
+          <p>El sistema lee el asunto y el cuerpo de cada correo entrante y lo clasifica en una de las categorías definidas: urgente, consulta de cliente, factura, notificación administrativa, o spam.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Etiquetado y enrutamiento</h3>
+          <p>Cada correo recibe su etiqueta en Gmail y, si corresponde, se reenvía o se notifica al responsable adecuado. Las urgencias activan una notificación inmediata por Slack.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Borrador de respuesta</h3>
+          <p>Para los tipos de consulta más frecuentes —estado de declaraciones, plazos, solicitud de documentación—, el sistema genera un borrador personalizado que el gestor solo tiene que revisar y enviar.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Archivo automático</h3>
+          <p>Los correos que no requieren acción humana —confirmaciones, notificaciones informativas, acuses de recibo— se archivan directamente con su etiqueta, sin pasar por la bandeja de entrada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="content-section">
+    <p class="section-label">Resultados</p>
+    <h2>La bandeja de entrada<br/>dejó de ser un problema</h2>
+    <p>La primera semana, el equipo pasó de abrir el correo con cierta ansiedad a encontrarse con una bandeja de entrada ya organizada. Solo los correos que realmente necesitaban atención estaban ahí.</p>
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="metric-value">70%</div>
+        <div class="metric-label">de correos gestionados sin intervención humana</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">6h → 45min</div>
+        <div class="metric-label">tiempo medio de respuesta a urgencias</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">0</div>
+        <div class="metric-label">notificaciones con plazo vistas fuera de tiempo</div>
+      </div>
+    </div>
+    <div class="quote-block">
+      <p class="quote-text">"Lo que más me sorprendió fue lo rápido que entendieron cómo funciona mi negocio. No tuve que explicar nada técnico. Ahora el correo ya no es lo primero que me da estrés por las mañanas."</p>
+      <div class="quote-author">Pablo G.</div>
+      <div class="quote-biz">Socio gestor — Gestoría, Bilbao</div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section style="padding-top:64px;padding-bottom:40px;max-width:760px;margin:0 auto;padding-left:24px;padding-right:24px;">
+    <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-600);margin-bottom:18px;">Más casos</p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <a href="/casos/contenido-a-excel/" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,85,164,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+        <span style="font-size:0.92rem;font-weight:600;">De PDFs y correos a Excel automáticamente</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;color:#2255a4"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="/casos/onboarding-formacion-online/" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,85,164,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+        <span style="font-size:0.92rem;font-weight:600;">Onboarding automatizado para academia online</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;color:#2255a4"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="cta-box">
+      <h2>¿Tu bandeja de entrada<br/>también es un caos?</h2>
+      <p>Si recibes muchos correos y sientes que nunca estás al día, hay una forma de solucionarlo sin contratar a nadie.</p>
+      <a href="/#cta-final" class="cta-btn">
+        Cuéntanos tu caso
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/casos/">Casos</a>
+      <a href="/sobre-nosotros/">Sobre nosotros</a>
+    </div>
+    <p>© 2025 Nodo Grau. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>

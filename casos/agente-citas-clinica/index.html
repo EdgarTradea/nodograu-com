@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agente de citas por WhatsApp para clínica dental — Nodo Grau</title>
+  <meta name="description" content="Cómo automatizamos la agenda de una clínica dental con un agente de IA en WhatsApp. 3 horas diarias ahorradas en recepción." />
+  <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png" />
+  <link rel="manifest" href="../../site.webmanifest" />
+  <meta property="og:title" content="Agente de citas por WhatsApp para clínica dental — Nodo Grau" />
+  <meta property="og:description" content="3 horas diarias ahorradas en recepción. Un agente de IA que agenda citas solo." />
+  <meta property="og:image" content="https://nodograu.com/android-chrome-512x512.png" />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a; --white: #ffffff;
+      --gray-400: #9a9a9a; --gray-600: #5a5a5a; --gray-800: #2a2a2a;
+      --accent: #1a3a5c; --accent-light: #2255a4; --accent-glow: rgba(34,85,164,0.12);
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--black); color: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-logo { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 26px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-link { font-size: 0.875rem; font-weight: 500; color: var(--gray-400); text-decoration: none; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--white); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--white); color: var(--black); font-size: 0.85rem; font-weight: 700; padding: 9px 18px; border-radius: 8px; text-decoration: none; letter-spacing: -0.01em; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+    @media (max-width: 600px) { .nav-links { display: none; } }
+
+    section { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .divider { width: 100%; max-width: 760px; margin: 0 auto; border: none; border-top: 1px solid rgba(255,255,255,0.07); }
+
+    /* BREADCRUMB */
+    .breadcrumb { padding-top: 108px; padding-bottom: 0; display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--gray-600); flex-wrap: wrap; }
+    .breadcrumb a { color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gray-400); }
+    .breadcrumb span { color: var(--gray-800); }
+
+    /* HERO */
+    .hero { padding-top: 28px; padding-bottom: 72px; }
+    .hero-tags { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .hero-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); background: var(--accent-glow); border: 1px solid rgba(34,85,164,0.25); padding: 4px 12px; border-radius: 100px; }
+    .hero h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .hero-lead { font-size: 1.1rem; color: var(--gray-400); line-height: 1.7; max-width: 580px; margin-bottom: 36px; }
+
+    .hero-metric-bar { display: flex; gap: 32px; flex-wrap: wrap; }
+    .hero-stat { display: flex; flex-direction: column; gap: 4px; }
+    .hero-stat-value { font-size: 2rem; font-weight: 900; letter-spacing: -0.04em; color: var(--white); }
+    .hero-stat-label { font-size: 0.78rem; color: var(--gray-600); }
+
+    /* SECTIONS */
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-600); margin-bottom: 18px; }
+    .content-section { padding-top: 72px; padding-bottom: 72px; }
+    .content-section h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.025em; margin-bottom: 20px; }
+    .content-section p { font-size: 1rem; color: var(--gray-400); line-height: 1.75; margin-bottom: 16px; max-width: 620px; }
+    .content-section p:last-child { margin-bottom: 0; }
+
+    /* PAIN LIST */
+    .pain-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .pain-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: var(--gray-400); line-height: 1.5; }
+    .pain-list li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--gray-600); margin-top: 8px; }
+
+    /* STEPS */
+    .steps { margin-top: 36px; display: flex; flex-direction: column; gap: 0; }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 20px; position: relative; }
+    .step:not(:last-child)::after { content: ''; position: absolute; left: 23px; top: 48px; bottom: -24px; width: 1px; background: rgba(255,255,255,0.08); }
+    .step + .step { padding-top: 32px; }
+    .step-num { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; color: var(--gray-400); flex-shrink: 0; letter-spacing: 0.02em; }
+    .step-content { padding-top: 12px; }
+    .step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .step-content p { font-size: 0.9rem; color: var(--gray-400); line-height: 1.65; margin-bottom: 0; }
+
+    /* RESULTADOS */
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+    @media (max-width: 560px) { .metrics { grid-template-columns: 1fr; } }
+    .metric-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px 20px; }
+    .metric-value { font-size: 2rem; font-weight: 900; letter-spacing: -0.04em; color: var(--white); margin-bottom: 6px; }
+    .metric-label { font-size: 0.82rem; color: var(--gray-400); line-height: 1.4; }
+
+    /* QUOTE */
+    .quote-block { margin-top: 48px; padding: 28px 32px; background: rgba(34,85,164,0.06); border: 1px solid rgba(34,85,164,0.2); border-radius: 14px; }
+    .quote-text { font-size: 1rem; color: var(--gray-400); line-height: 1.7; font-style: italic; margin-bottom: 16px; }
+    .quote-author { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+    .quote-biz { font-size: 0.78rem; color: var(--gray-600); }
+
+    /* CTA FINAL */
+    .cta-final { padding-top: 0; padding-bottom: 100px; }
+    .cta-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 56px 40px; text-align: center; }
+    @media (max-width: 560px) { .cta-box { padding: 40px 24px; } }
+    .cta-box h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 14px; }
+    .cta-box p { font-size: 1rem; color: var(--gray-400); max-width: 400px; margin: 0 auto 32px; line-height: 1.7; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--black); font-size: 1rem; font-weight: 700; padding: 14px 28px; border-radius: 10px; text-decoration: none; letter-spacing: -0.01em; transition: opacity 0.2s, transform 0.2s; }
+    .cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 28px 24px; text-align: center; font-size: 0.8rem; color: var(--gray-600); }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 10px; flex-wrap: wrap; }
+    .footer-links a { color: var(--gray-600); text-decoration: none; }
+    .footer-links a:hover { color: var(--gray-400); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="../../logo.svg" alt="Nodo Grau" />
+      Nodo Grau
+    </a>
+    <div class="nav-links">
+      <a href="/casos/" class="nav-link active">Casos</a>
+      <a href="/sobre-nosotros/" class="nav-link">Sobre nosotros</a>
+    </div>
+    <a href="/#cta-final" class="nav-cta">
+      Hablemos
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
+
+  <section class="breadcrumb">
+    <a href="/">Inicio</a>
+    <span>›</span>
+    <a href="/casos/">Casos</a>
+    <span>›</span>
+    <span style="color:var(--gray-400)">Agente de citas para clínica dental</span>
+  </section>
+
+  <section class="hero">
+    <div class="hero-tags">
+      <span class="hero-tag">Sanidad</span>
+      <span class="hero-tag">Agente de IA</span>
+      <span class="hero-tag">WhatsApp</span>
+    </div>
+    <h1>Agente de citas por WhatsApp<br/>para clínica dental</h1>
+    <p class="hero-lead">La recepcionista gestionaba toda la agenda por teléfono y WhatsApp. Llamadas perdidas, huecos sin cubrir y pacientes que se iban a otra clínica. Automatizamos el proceso completo con un agente de IA.</p>
+    <div class="hero-metric-bar">
+      <div class="hero-stat">
+        <span class="hero-stat-value">3h/día</span>
+        <span class="hero-stat-label">ahorradas en recepción</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">0</span>
+        <span class="hero-stat-label">llamadas perdidas</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">2 sem</span>
+        <span class="hero-stat-label">de implementación</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="content-section">
+    <p class="section-label">El problema</p>
+    <h2>Una agenda que dependía<br/>de que alguien estuviese mirando</h2>
+    <p>La clínica recibía solicitudes de cita por tres vías distintas: teléfono, WhatsApp y un formulario en la web. Todo llegaba a la misma persona, la recepcionista, que tenía que coordinar las tres mientras atendía a los pacientes que ya estaban en la sala.</p>
+    <p>El resultado era predecible: mensajes de WhatsApp que se respondían con horas de retraso, llamadas que no se cogían durante las horas de mayor actividad, y una agenda que se gestionaba a base de memoria y notas en papel.</p>
+    <ul class="pain-list">
+      <li>Mensajes de WhatsApp sin responder durante horas en momentos de mucha actividad</li>
+      <li>Llamadas perdidas que terminaban con el paciente llamando a otra clínica</li>
+      <li>Dobles reservas cuando alguien confirmaba por dos canales distintos</li>
+      <li>Huecos libres que quedaban sin cubrir porque nadie los ofrecía activamente</li>
+      <li>La recepcionista sin poder centrarse en el paciente que tenía delante</li>
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="content-section">
+    <p class="section-label">La solución</p>
+    <h2>Un agente que entiende,<br/>consulta y confirma</h2>
+    <p>Construimos un agente de IA conectado al WhatsApp de la clínica. El paciente escribe un mensaje en lenguaje natural —"quiero pedir cita para una revisión"— y el agente se encarga de todo lo que viene después.</p>
+    <p>El agente tiene acceso en tiempo real a la agenda, conoce los tipos de visita y su duración, y puede hacer preguntas cuando necesita información adicional. Todo sin que nadie en la clínica tenga que intervenir.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Recepción y clasificación</h3>
+          <p>El agente recibe el mensaje, identifica si es una solicitud de cita, una cancelación, una duda o un mensaje que necesita atención humana. Solo interrumpe al equipo cuando realmente hace falta.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Recogida de datos y propuesta de hueco</h3>
+          <p>Pregunta el motivo de la visita, si es paciente existente o nuevo, y consulta la agenda en tiempo real. Ofrece dos o tres opciones de horario y espera confirmación.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Confirmación y registro</h3>
+          <p>Una vez confirmado el hueco, el agente crea la cita directamente en el sistema de gestión de la clínica, envía un mensaje de confirmación al paciente y programa un recordatorio automático 24 horas antes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Gestión de cambios y cancelaciones</h3>
+          <p>Si el paciente quiere cambiar o cancelar, el agente lo gestiona solo: libera el hueco, ofrece alternativas si lo pide, y actualiza la agenda sin que nadie tenga que tocarla.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="content-section">
+    <p class="section-label">Resultados</p>
+    <h2>Lo que cambió en<br/>las primeras dos semanas</h2>
+    <p>El sistema entró en producción un lunes. Para el viernes de esa misma semana, la recepcionista había dejado de gestionar WhatsApp manualmente. Los números al cabo de un mes:</p>
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="metric-value">3h/día</div>
+        <div class="metric-label">recuperadas por la recepcionista para atención presencial</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">0</div>
+        <div class="metric-label">citas perdidas por mensajes sin responder</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">87%</div>
+        <div class="metric-label">de las citas gestionadas completamente por el agente</div>
+      </div>
+    </div>
+    <div class="quote-block">
+      <p class="quote-text">"Llevábamos años haciendo lo mismo a mano. En dos semanas teníamos un sistema que lo hacía solo. Lo que más me sorprendió fue que los pacientes no notaron que no era una persona — solo notaron que la respuesta llegaba mucho antes."</p>
+      <div class="quote-author">María R.</div>
+      <div class="quote-biz">Directora, Clínica Dental — Valencia</div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section style="padding-top:64px;padding-bottom:40px;max-width:760px;margin:0 auto;padding-left:24px;padding-right:24px;">
+    <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-600);margin-bottom:18px;">Más casos</p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <a href="/casos/onboarding-formacion-online/" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-decoration:none;color:inherit;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(34,85,164,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+        <span style="font-size:0.92rem;font-weight:600;">Onboarding automatizado para academia online</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;color:#2255a4"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="/casos/agente-pedidos-dark-kitchen/" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-decoration:none;color:inherit;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(34,85,164,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.07)'">
+        <span style="font-size:0.92rem;font-weight:600;">Recepción de pedidos para dark kitchen</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;color:#2255a4"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="cta-box">
+      <h2>¿Tienes un proceso<br/>parecido en tu negocio?</h2>
+      <p>Cuéntanos cómo funciona hoy. Te decimos si tiene sentido automatizarlo.</p>
+      <a href="/#cta-final" class="cta-btn">
+        Cuéntanos tu caso
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/casos/">Casos</a>
+      <a href="/sobre-nosotros/">Sobre nosotros</a>
+    </div>
+    <p>© 2025 Nodo Grau. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>

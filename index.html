@@ -98,6 +98,24 @@
 
     .nav-cta:hover { opacity: 0.85; }
 
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: var(--white); }
+
+    @media (max-width: 600px) { .nav-links { display: none; } }
+
     /* ─── LAYOUT ──────────────────────────────────────── */
     section {
       width: 100%;
@@ -669,10 +687,14 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">
+    <a href="/" class="nav-logo">
       <img src="logo.svg" alt="Nodo Grau" />
       Nodo Grau
     </a>
+    <div class="nav-links">
+      <a href="/casos/" class="nav-link">Casos</a>
+      <a href="/sobre-nosotros/" class="nav-link">Sobre nosotros</a>
+    </div>
     <a href="#cta-final" class="nav-cta">
       Hablemos
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -864,6 +886,10 @@
 
   <!-- FOOTER -->
   <footer>
+    <div style="display:flex;align-items:center;justify-content:center;gap:24px;margin-bottom:10px;flex-wrap:wrap;">
+      <a href="/casos/" style="font-size:0.8rem;color:var(--gray-600);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#9a9a9a'" onmouseout="this.style.color='#5a5a5a'">Casos</a>
+      <a href="/sobre-nosotros/" style="font-size:0.8rem;color:var(--gray-600);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#9a9a9a'" onmouseout="this.style.color='#5a5a5a'">Sobre nosotros</a>
+    </div>
     <p>© 2025 Nodo Grau. Todos los derechos reservados.</p>
   </footer>
 
