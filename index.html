@@ -186,9 +186,29 @@
     <section id="contacto" data-screen-label="Contacto" style="max-width:1120px; margin:0 auto; padding:clamp(64px,12vh,140px) 24px clamp(48px,8vh,90px); border-top:1px solid #191c20; display:flex; flex-direction:column; gap:28px; align-items:flex-start">
       <h2 style="margin:0; font-size:clamp(30px,5.4vw,54px); line-height:1.05; letter-spacing:-0.035em; font-weight:600; max-width:18ch; text-wrap:balance">Cuéntame dónde se te va el tiempo.</h2>
       <p style="margin:0; color:#9aa1a9; font-size:17px; line-height:1.55; max-width:48ch; text-wrap:pretty">Media hora, sin presupuesto de por medio. Si no hay nada que automatizar, te lo digo.</p>
-      <a href="mailto:hola@nodograu.com" style="display:inline-flex; align-items:center; gap:10px; background:#6fe3d4; color:#06110f; font-size:15px; font-weight:600; padding:15px 26px; border-radius:2px; min-height:48px; box-sizing:border-box" style-hover="background:#a9f2e8; color:#06110f">Reservar una llamada
-        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px">→</span>
-      </a>
+      <form id="lead-form" style="display:flex; flex-direction:column; gap:18px; width:100%; max-width:560px">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px">
+          <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Nombre
+            <input type="text" name="nombre" required autocomplete="name" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Teléfono
+            <input type="tel" name="telefono" required autocomplete="tel" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
+          </label>
+        </div>
+        <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Email
+          <input type="email" name="email" required autocomplete="email" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">¿Dónde tienes el mayor dolor? ¿Qué querrías solucionar?
+          <textarea name="situacion" required rows="4" placeholder="Ej.: pierdo horas contestando WhatsApps, se me escapan reservas, paso pedidos a mano…" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; line-height:1.5; resize:vertical; outline:none" style-focus="border-color:#6fe3d4"></textarea>
+        </label>
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:18px">
+          <button type="submit" style="display:inline-flex; align-items:center; gap:10px; background:#6fe3d4; color:#06110f; font-size:15px; font-weight:600; padding:15px 26px; border-radius:2px; min-height:48px; border:none; cursor:pointer; font-family:'Space Grotesk',Helvetica,sans-serif" style-hover="background:#a9f2e8">Enviar y elegir hora
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px">→</span>
+          </button>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; color:#6b7178; text-transform:uppercase">Al enviar eliges hora en el calendario</span>
+        </div>
+      </form>
       <div style="display:flex; flex-wrap:wrap; gap:10px 32px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#6b7178; margin-top:6px">
         <a href="mailto:hola@nodograu.com">hola@nodograu.com</a>
         <span>Barcelona</span>
@@ -482,6 +502,38 @@ class Component extends DCLogic {
     });
   }
 }
+</script>
+<script>
+(function () {
+  var CALENDLY = "https://calendly.com/edgar-grau-montero/30min";
+  document.addEventListener("submit", function (e) {
+    var form = e.target;
+    if (!form || form.id !== "lead-form") return;
+    e.preventDefault();
+    var data = new FormData(form);
+    if (data.get("botcheck")) return;
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = "Enviando…"; }
+    var calendlyUrl = CALENDLY +
+      "?name=" + encodeURIComponent(data.get("nombre") || "") +
+      "&email=" + encodeURIComponent(data.get("email") || "");
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      keepalive: true,
+      body: JSON.stringify({
+        access_key: "d39773a3-5cf7-4423-b427-43419ac4275a",
+        subject: "Nuevo lead — Nodo Grau",
+        nombre: data.get("nombre"),
+        email: data.get("email"),
+        telefono: data.get("telefono"),
+        situacion: data.get("situacion")
+      })
+    }).catch(function () {}).finally(function () {
+      window.location.href = calendlyUrl;
+    });
+  });
+})();
 </script>
 </body>
 </html>
