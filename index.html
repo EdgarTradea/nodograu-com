@@ -190,17 +190,17 @@
         <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px">
           <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Nombre
-            <input type="text" name="nombre" required autocomplete="name" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
+            <input type="text" name="nombre" required="true" autocomplete="name" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
           </label>
           <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Teléfono
-            <input type="tel" name="telefono" required autocomplete="tel" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
+            <input type="tel" name="telefono" required="true" autocomplete="tel" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
           </label>
         </div>
         <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Email
-          <input type="email" name="email" required autocomplete="email" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
+          <input type="email" name="email" required="true" autocomplete="email" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
         </label>
         <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">¿Dónde tienes el mayor dolor? ¿Qué querrías solucionar?
-          <textarea name="situacion" required rows="4" placeholder="Ej.: pierdo horas contestando WhatsApps, se me escapan reservas, paso pedidos a mano…" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; line-height:1.5; resize:vertical; outline:none" style-focus="border-color:#6fe3d4"></textarea>
+          <textarea name="situacion" required="true" rows="4" placeholder="Ej.: pierdo horas contestando WhatsApps, se me escapan reservas, paso pedidos a mano…" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; line-height:1.5; resize:vertical; outline:none" style-focus="border-color:#6fe3d4"></textarea>
         </label>
         <div style="display:flex; flex-wrap:wrap; align-items:center; gap:18px">
           <button type="submit" style="display:inline-flex; align-items:center; gap:10px; background:#6fe3d4; color:#06110f; font-size:15px; font-weight:600; padding:15px 26px; border-radius:2px; min-height:48px; border:none; cursor:pointer; font-family:'Space Grotesk',Helvetica,sans-serif" style-hover="background:#a9f2e8">Enviar y elegir hora
@@ -512,6 +512,24 @@ class Component extends DCLogic {
     e.preventDefault();
     var data = new FormData(form);
     if (data.get("botcheck")) return;
+    // Red de seguridad: el runtime de la plantilla puede descartar los `required`
+    // del HTML, asi que la obligatoriedad se comprueba tambien aqui.
+    var faltan = ["nombre", "telefono", "email", "situacion"].filter(function (campo) {
+      return !String(data.get(campo) || "").trim();
+    });
+    if (faltan.length) {
+      var primero = form.querySelector('[name="' + faltan[0] + '"]');
+      if (primero) {
+        primero.setCustomValidity("Rellena este campo para continuar.");
+        primero.reportValidity();
+        primero.addEventListener("input", function limpiar() {
+          primero.setCustomValidity("");
+          primero.removeEventListener("input", limpiar);
+        });
+        primero.focus();
+      }
+      return;
+    }
     var btn = form.querySelector('button[type="submit"]');
     if (btn) { btn.disabled = true; btn.textContent = "Enviando…"; }
     var calendlyUrl = CALENDLY +
