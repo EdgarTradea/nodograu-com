@@ -199,6 +199,30 @@
         <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Email
           <input type="email" name="email" required="true" autocomplete="email" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none" style-focus="border-color:#6fe3d4">
         </label>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px">
+          <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Sector
+            <select name="sector" required="true" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none; appearance:none" style-focus="border-color:#6fe3d4">
+              <option value="">Elige uno…</option>
+              <option value="Restauración y hostelería">Restauración y hostelería</option>
+              <option value="Clínicas y salud">Clínicas y salud</option>
+              <option value="Inmobiliaria">Inmobiliaria</option>
+              <option value="Servicios profesionales">Servicios profesionales (asesoría, abogados…)</option>
+              <option value="Formación">Formación</option>
+              <option value="Construcción y reformas">Construcción y reformas</option>
+              <option value="Comercio y ecommerce">Comercio y ecommerce</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">Tamaño
+            <select name="tamano" required="true" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; outline:none; appearance:none" style-focus="border-color:#6fe3d4">
+              <option value="">Elige uno…</option>
+              <option value="Solo yo">Solo yo</option>
+              <option value="2-5 personas">2-5 personas</option>
+              <option value="6-20 personas">6-20 personas</option>
+              <option value="Más de 20">Más de 20</option>
+            </select>
+          </label>
+        </div>
         <label style="display:flex; flex-direction:column; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#8d939b">¿Dónde tienes el mayor dolor? ¿Qué querrías solucionar?
           <textarea name="situacion" required="true" rows="4" placeholder="Ej.: pierdo horas contestando WhatsApps, se me escapan reservas, paso pedidos a mano…" style="background:#0d0f12; border:1px solid #22262b; border-radius:2px; padding:13px 14px; color:#e8eaed; font-family:'Space Grotesk',Helvetica,sans-serif; font-size:15px; line-height:1.5; resize:vertical; outline:none" style-focus="border-color:#6fe3d4"></textarea>
         </label>
@@ -514,7 +538,7 @@ class Component extends DCLogic {
     if (data.get("botcheck")) return;
     // Red de seguridad: el runtime de la plantilla puede descartar los `required`
     // del HTML, asi que la obligatoriedad se comprueba tambien aqui.
-    var faltan = ["nombre", "telefono", "email", "situacion"].filter(function (campo) {
+    var faltan = ["nombre", "telefono", "email", "sector", "tamano", "situacion"].filter(function (campo) {
       return !String(data.get(campo) || "").trim();
     });
     if (faltan.length) {
@@ -541,6 +565,8 @@ class Component extends DCLogic {
       nombre: data.get("nombre"),
       email: data.get("email"),
       telefono: data.get("telefono"),
+      sector: data.get("sector"),
+      tamano: data.get("tamano"),
       situacion: data.get("situacion")
     };
     var alCrm = fetch("https://nodograu-crm.vercel.app/api/leads", {
@@ -559,6 +585,8 @@ class Component extends DCLogic {
         nombre: lead.nombre,
         email: lead.email,
         telefono: lead.telefono,
+        sector: lead.sector,
+        tamano: lead.tamano,
         situacion: lead.situacion,
         lead_b64: btoa(unescape(encodeURIComponent(JSON.stringify(lead))))
       })
