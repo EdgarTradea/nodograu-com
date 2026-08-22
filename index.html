@@ -517,6 +517,14 @@ class Component extends DCLogic {
     var calendlyUrl = CALENDLY +
       "?name=" + encodeURIComponent(data.get("nombre") || "") +
       "&email=" + encodeURIComponent(data.get("email") || "");
+    var lead = {
+      lead_id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+      fecha: new Date().toISOString(),
+      nombre: data.get("nombre"),
+      email: data.get("email"),
+      telefono: data.get("telefono"),
+      situacion: data.get("situacion")
+    };
     fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -524,10 +532,11 @@ class Component extends DCLogic {
       body: JSON.stringify({
         access_key: "d39773a3-5cf7-4423-b427-43419ac4275a",
         subject: "Nuevo lead — Nodo Grau",
-        nombre: data.get("nombre"),
-        email: data.get("email"),
-        telefono: data.get("telefono"),
-        situacion: data.get("situacion")
+        nombre: lead.nombre,
+        email: lead.email,
+        telefono: lead.telefono,
+        situacion: lead.situacion,
+        lead_b64: btoa(unescape(encodeURIComponent(JSON.stringify(lead))))
       })
     }).catch(function () {}).finally(function () {
       window.location.href = calendlyUrl;
