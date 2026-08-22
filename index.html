@@ -525,7 +525,13 @@ class Component extends DCLogic {
       telefono: data.get("telefono"),
       situacion: data.get("situacion")
     };
-    fetch("https://api.web3forms.com/submit", {
+    var alCrm = fetch("https://nodograu-crm.vercel.app/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      keepalive: true,
+      body: JSON.stringify(Object.assign({ token: "11d109f3a43afca59e7555c8905a29bc" }, lead))
+    });
+    var porEmail = fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       keepalive: true,
@@ -538,7 +544,8 @@ class Component extends DCLogic {
         situacion: lead.situacion,
         lead_b64: btoa(unescape(encodeURIComponent(JSON.stringify(lead))))
       })
-    }).catch(function () {}).finally(function () {
+    });
+    Promise.allSettled([alCrm, porEmail]).then(function () {
       window.location.href = calendlyUrl;
     });
   });
